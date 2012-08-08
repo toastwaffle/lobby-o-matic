@@ -21,23 +21,48 @@
 	</div><!-- /header -->
 
 	<div data-role="content" data-theme="b">
-		<p>Please log in or register below.</p>
-		<form action="login.php" method="post">
-			<p><label for="loginusername">Username: </label><input type="text" name="username" id="loginusername" /></p>
-			<p><label for="loginpassword">Password: </label><input type="password" name="password" id="loginpassword" /></p>
-			<input type="submit" data-icon="star" name="login" value="Log In" />
-		</form>
+		<h2>Please log in or register below.</h2>
+		<div data-role="container" data-corners="true">
+			<h3>Log In</h3>
+			<form action="login.php" method="post">
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="loginusername">Username: </label><input type="text" name="username" id="loginusername" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="loginpassword">Password: </label><input type="password" name="password" id="loginpassword" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<input type="submit" data-icon="star" name="login" value="Log In" />
+				</div>
+			</form>
+		</div>
 		<br />
-		<form action="login.php" method="post">
-			<p><label for="regusername">Username: </label><input type="text" name="username" id="regusername" /></p>
-			<p><label for="firstname">First Name: </label><input type="text" name="firstname" id="firstname" /></p>
-			<p><label for="lastname">Last Name: </label><input type="text" name="lastname" id="lastname" /></p>
-			<p><label for="email">Email: </label><input type="email" name="email" id="email" /></p>
-			<p><label for="regpassword">Password: </label><input type="password" name="password" id="regpassword" /></p>
-			<p><label for="repeat">Repeat Password: </label><input type="password" name="repeat" id="repeat" /></p>
-			<input type="submit" data-icon="star" name="register" value="Register" />
-		</form>
-		<br />
+		<div data-role="container" data-corners="true">
+			<h3>Register</h3>
+			<form action="login.php" method="post">
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="regusername">Username: </label><input type="text" name="username" id="regusername" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="firstname">First Name: </label><input type="text" name="firstname" id="firstname" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="lastname">Last Name: </label><input type="text" name="lastname" id="lastname" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="email">Email: </label><input type="email" name="email" id="email" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="regpassword">Password: </label><input type="password" name="password" id="regpassword" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<label for="repeat">Repeat Password: </label><input type="password" name="repeat" id="repeat" />
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label">
+					<input type="submit" data-icon="star" name="register" value="Register" />
+				</div>
+			</form>
+		</div>
 	</div><!-- /content -->
 
 <?php include('footer.php'); ?>
