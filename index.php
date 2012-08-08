@@ -1,7 +1,7 @@
 <?php
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
-		//header('Location: login.php?redirect=index.php');
+		header('Location: login.php?redirect=index.php');
 	}
 ?>
 <!DOCTYPE html> 
