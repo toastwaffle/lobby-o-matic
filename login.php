@@ -107,6 +107,7 @@ EMAILTEXT;
 	<link rel="stylesheet" href="./resources/jquery.mobile-1.1.1.css" />
 	<link rel="stylesheet" href="./resources/jquery.mobile.structure-1.1.1.css" />
 	<link rel="stylesheet" href="./resources/jquery.mobile.theme-1.1.1.css" />
+	<link rel="stylesheet" href="./resources/style.css" />
 	<script src="./resources/jquery-1.7.1.min.js"></script>
 	<script src="./resources/jquery.mobile-1.1.1.min.js"></script>
 </head> 
