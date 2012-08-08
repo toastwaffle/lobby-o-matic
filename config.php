@@ -19,6 +19,15 @@
     if (isset($_GET['pleaselogin'])) {
         $messages .= '<p class="warning">Please log in to use the system.</p>';
     }
+    if (isset($_GET['noconfirm'])) {
+        $messages .= '<p class="warning">Sorry, we couldn\'t confirm your email. Please go to your settings to resend the confirmation email.</p>';
+    }
+    if (isset($_GET['confirmed'])) {
+        $messages .= '<p class="success">You\'re email address has been confirmed.</p>';
+    }
+    if (isset($_GET['error'])) {
+        $messages .= '<p class="error">An error occurred. Please try again later.</p>';
+    }
 
     function shutdown() {
         global $conn;

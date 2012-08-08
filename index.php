@@ -34,7 +34,7 @@
 		<br />
 		<ul data-role="listview" data-inset="true" data-filter="true">
 			<?php
-				$result = $conn->query('SELECT Title,Description,BillID FROM Bills');
+				$result = $conn->query('SELECT Title,Description,BillID FROM Bills ORDER BY Title ASC');
 				if (!$result) {
 					die($conn->error);
 				}

@@ -10,6 +10,7 @@
 		$result = $conn->query($query);
 		if (!$result) {
 			$messages .= '<p class="error">An error occurred. Please try again later.</p>';
+			error_log('MySQL Error: '.$conn->error.PHP_EOL,3,'/home/samuel/lobbyomatic.log');
 		} else {
 			if ($result->num_rows !== 1) {
 				$messages .= '<p class="error">Sorry, could not log you in. Please try again.</p>';
@@ -42,6 +43,7 @@
 		$result = $conn->query($query);
 		if (!$result) {
 			$messages .= '<p class="error">An error occurred. Please try again later.</p>';
+			error_log('MySQL Error: '.$conn->error.PHP_EOL,3,'/home/samuel/lobbyomatic.log');
 		} else {
 			if ($result->num_rows > 0) {
 				$continue = false;
@@ -53,6 +55,7 @@
 		$result = $conn->query($query);
 		if (!$result) {
 			$messages .= '<p class="error">An error occurred. Please try again later.</p>';
+			error_log('MySQL Error: '.$conn->error.PHP_EOL,3,'/home/samuel/lobbyomatic.log');
 		} else {
 			if ($result->num_rows > 0) {
 				$continue = false;
@@ -69,6 +72,7 @@
 			$result = $conn->query($query);
 			if (!$result) {
 				$messages .= '<p class="error">An error occurred. Please try again later.</p>';
+				error_log('MySQL Error: '.$conn->error.PHP_EOL,3,'/home/samuel/lobbyomatic.log');
 			} else {
 				$confirmlink = 'http://www.toastwaffle.com/lobby-o-matic/confirm.php?u='.$_POST['username'].'&key='.hash('sha512', $_POST['firstname'].$_POST['lastname'].$_POST['email']);
 				$emailtext = <<<EMAILTEXT
