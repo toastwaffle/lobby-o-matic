@@ -39,15 +39,17 @@
 					if (!$result) {
 						die($conn->error);
 					}
+					$billPopups = array();
 					while ($row = $result->fetch_assoc()) {
 						echo('<li>
 								<a href="#billPopup'.$row['BillID'].'" data-rel="popup">'.$row['Title'].'</a>
-							</li>
-							<div data-role="popup" id="billPopup'.$row['BillID'].'">
+							</li>'.PHP_EOL);
+						$billPopups[] = '<div data-role="popup" id="billPopup'.$row['BillID'].'">
 								<p>'.$row['Description'].'</p>
 								<p><a href="bills.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
-							</div>'.PHP_EOL);
+							</div>';
 					}
+					echo(implode(PHP_EOL, $billPopups).PHP_EOL);
 				?>
 			</ul>
 	</div><!-- /content -->
