@@ -19,8 +19,8 @@
 					unset($row['password']);
 					foreach($result->fetch_assoc() as $key => $value) {
 						$_SESSION[$key] = $value;
-						header('Location: '.$_POST['redirect'].'?loggedin');
-					}					
+					}
+					header('Location: '.$_POST['redirect'].'?loggedin');					
 				} else {
 					$messages .= '<p class="error">Sorry, could not log you in. Please try again.</p>';
 				}
@@ -85,6 +85,11 @@ Thanks,
 The Lobby-O-Matic team.
 EMAILTEXT;
 				mail($_POST['email'], '[Lobby-O-Matic] Confirm Email Address', $emailtext, 'From: noreply@toastwaffle.com');
+				unset($_POST['password']);
+				foreach($_POST as $key => $value) {
+					$_SESSION[$key] = $value;
+				}
+				$_SESSION['id'] = $conn->insert_id;
 				header('Location: '.$_POST['redirect'].'?registered');
 			}
 		}
