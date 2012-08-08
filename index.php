@@ -1,3 +1,9 @@
+<?php
+	include('config.php');
+	if (!isset($_SESSION['username'])) {
+		//header('Location: login.php?redirect=index.php');
+	}
+?>
 <!DOCTYPE html> 
 <html> 
 	<head> 
@@ -17,8 +23,30 @@
 		<h1>Lobby-O-Matic</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">	
-		<p>Hello world</p>		
+	<div data-role="content" data-theme="b">	
+		<p>Welcome to Lobby-O-Matic. This is the place to get in contact with MPs regarding either upcoming Bills in Parliament or the topic of your choice.</p>
+		<p>To get started, search for a topic or select a bill below</p>
+		<div data-role="container">
+			<form action="search.php" method="post">
+				<input type="text" name="searchterm" />
+				<input type="submit" data-icon="search" value="Search" />
+			</form>
+		</div>
+		<div data-role="container">
+			<ul data-role="listview" data-inset="true" data-filter="true">
+				<?php
+					$result = $conn->query('SELECT Title,Description,BillID FROM Bills');
+					while ($row = $result->fetch_assoc()) {
+						echo('<li>
+								<a href="#billPopup'.$row['BillID'].'" data-rel="popup">'.$row['Title'].'</a>
+							</li>
+							<div data-role="popup" id="billPopup'.$row['BillID'].'">
+								<p>'.$row['Description'].'</p>
+								<p><a href="bills.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+							</div>'.PHP_EOL);
+					}
+				?>
+			</ul>
 	</div><!-- /content -->
 
 </div><!-- /page -->
