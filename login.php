@@ -26,10 +26,10 @@
 			<h3>Log In</h3>
 			<form action="login.php" method="post">
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="loginusername">Username: </label><input type="text" name="username" id="loginusername" />
+					<label for="loginusername">Username: </label><input type="text" name="username" id="loginusername" placeholder="Username" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="loginpassword">Password: </label><input type="password" name="password" id="loginpassword" />
+					<label for="loginpassword">Password: </label><input type="password" name="password" id="loginpassword" placeholder="Password" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
 					<input type="submit" data-icon="star" name="login" value="Log In" />
@@ -41,22 +41,22 @@
 			<h3>Register</h3>
 			<form action="login.php" method="post">
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="regusername">Username: </label><input type="text" name="username" id="regusername" />
+					<label for="regusername">Username: </label><input type="text" name="username" id="regusername" placeholder="Username" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="firstname">First Name: </label><input type="text" name="firstname" id="firstname" />
+					<label for="firstname">First Name: </label><input type="text" name="firstname" id="firstname" placeholder="First Name" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="lastname">Last Name: </label><input type="text" name="lastname" id="lastname" />
+					<label for="lastname">Last Name: </label><input type="text" name="lastname" id="lastname" placeholder="Last Name" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="email">Email: </label><input type="email" name="email" id="email" />
+					<label for="email">Email: </label><input type="email" name="email" id="email" placeholder="Email" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="regpassword">Password: </label><input type="password" name="password" id="regpassword" />
+					<label for="regpassword">Password: </label><input type="password" name="password" id="regpassword" placeholder="Password" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="repeat">Repeat Password: </label><input type="password" name="repeat" id="repeat" />
+					<label for="repeat">Repeat Password: </label><input type="password" name="repeat" id="repeat" placeholder="Repeat Password" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
 					<input type="submit" data-icon="star" name="register" value="Register" />
