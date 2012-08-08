@@ -116,7 +116,8 @@ EMAILTEXT;
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="panel" data-id="main">
+<div data-role="page" id="main">
 
 	<div data-role="header">
 		<h1>Lobby-O-Matic - Login</h1>
@@ -185,6 +186,7 @@ EMAILTEXT;
 <?php include('footer.php'); ?>
 
 </div><!-- /page -->
+</div>
 
 </body>
 </html>

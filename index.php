@@ -21,6 +21,7 @@
 </head> 
 <body> 
 
+<div data-role="panel" data-id="main">
 <div data-role="page" id="main">
 
 	<div data-role="header">
@@ -77,6 +78,7 @@
 </div><!-- /page -->
 
 <?php echo(implode(PHP_EOL,$billPopups)); ?>
+</div>
 
 </body>
 </html>
