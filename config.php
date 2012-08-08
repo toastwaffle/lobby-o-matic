@@ -10,13 +10,13 @@
 
     $messages = ''; // Used to display messages on every page.
 
-    if isset($_GET['loggedin']) {
+    if (isset($_GET['loggedin'])) {
         $messages .= '<p class="success">You are now logged in.</p>';
     }
-    if isset($_GET['registered']) {
+    if (isset($_GET['registered'])) {
         $messages .= '<p class="success">You have been registered. Please check your email to confirm your address.</p>';
     }
-    if isset($_GET['pleaselogin']) {
+    if (isset($_GET['pleaselogin'])) {
         $messages .= '<p class="warning">Please log in to use the system.</p>';
     }
 
