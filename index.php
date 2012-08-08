@@ -35,7 +35,9 @@
 		<div data-role="container">
 			<ul data-role="listview" data-inset="true" data-filter="true">
 				<?php
+					print_r($conn);
 					$result = $conn->query('SELECT Title,Description,BillID FROM Bills');
+					print_r($result);
 					if (!$result) {
 						die($conn->error);
 					}
