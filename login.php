@@ -116,7 +116,7 @@ EMAILTEXT;
 			<h3>Log In</h3>
 			<form action="login.php" method="post">
 				<?php
-					if isset($_GET['redirect']) {
+					if (isset($_GET['redirect'])) {
 						echo('<input type="hidden" name="redirect" value="'.$_GET['redirect'].'" />'.PHP_EOL);
 					} else {
 						echo('<input type="hidden" name="redirect" value="index.php" />'.PHP_EOL);						
@@ -138,7 +138,7 @@ EMAILTEXT;
 			<h3>Register</h3>
 			<form action="login.php" method="post">
 				<?php
-					if isset($_GET['redirect']) {
+					if (isset($_GET['redirect'])) {
 						echo('<input type="hidden" name="redirect" value="'.$_GET['redirect'].'" />'.PHP_EOL);
 					} else {
 						echo('<input type="hidden" name="redirect" value="index.php" />'.PHP_EOL);						
