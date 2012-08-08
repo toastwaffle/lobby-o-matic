@@ -37,13 +37,8 @@
 				if (!$result) {
 					die($conn->error);
 				}
-				$billPopups = array();
 				while ($row = $result->fetch_assoc()) {
-					echo('<li><a href="#billPopup'.$row['BillID'].'" data-rel="popup">'.$row['Title'].'</a></li>'.PHP_EOL);
-					$billPopups[] = '<div data-role="popup" id="billPopup'.$row['BillID'].'">
-							<p>'.$row['Description'].'</p>
-							<p><a href="bills.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
-						</div>';
+					echo('<li><a href="bills.php?billid='.$row['BillID'].'" data-rel="popup" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
 				}
 			?>
 		</ul>
@@ -52,10 +47,6 @@
 <?php include('footer.php'); ?>
 
 </div><!-- /page -->
-
-<?php
-	echo(implode(PHP_EOL, $billPopups).PHP_EOL);
-?>
 
 </body>
 </html>
