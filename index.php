@@ -36,6 +36,9 @@
 			<ul data-role="listview" data-inset="true" data-filter="true">
 				<?php
 					$result = $conn->query('SELECT Title,Description,BillID FROM Bills');
+					if (!$result) {
+						die($conn->error);
+					}
 					while ($row = $result->fetch_assoc()) {
 						echo('<li>
 								<a href="#billPopup'.$row['BillID'].'" data-rel="popup">'.$row['Title'].'</a>
