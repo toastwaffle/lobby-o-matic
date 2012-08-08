@@ -30,6 +30,7 @@
 			<input type="text" name="searchterm" />
 			<input type="submit" data-icon="search" value="Search" />
 		</form>
+		<br />
 		<ul data-role="listview" data-inset="true" data-filter="true">
 			<?php
 				$result = $conn->query('SELECT Title,Description,BillID FROM Bills');
