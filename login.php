@@ -17,7 +17,7 @@
 				$row = $result->fetch_assoc();
 				if ($hasher->CheckPassword($_POST['password'],$row['password'])) {
 					unset($row['password']);
-					foreach($result->fetch_assoc() as $key => $value) {
+					foreach($row as $key => $value) {
 						$_SESSION[$key] = $value;
 					}
 					header('Location: '.$_POST['redirect'].'?loggedin');					
@@ -72,7 +72,7 @@
 			} else {
 				$confirmlink = 'http://www.toastwaffle.com/lobby-o-matic/confirm.php?u='.$_POST['username'].'&key='.hash('sha512', $_POST['firstname'].$_POST['lastname'].$_POST['email']);
 				$emailtext = <<<EMAILTEXT
-Dear {$row['firstname']} {$row['lastname']},
+Dear {$_POST['firstname']} {$_POST['lastname']},
 
 Thanks for registering for Lobby-O-Matic. To complete your 
 registration, please click on the following link, or copy and paste 
