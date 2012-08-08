@@ -42,8 +42,8 @@
 
         $basefilename = '/tmp/bill'.(string)time();
 
-				$pdfurl = $matches[0].$basefilename.'.pdf';
-        downloadFile($matches[0], $pdfurl);
+				$pdfurl = $matches[0],$basefilename.'.pdf';
+        downloadFile($pdfurl);
 
         system('pdftotext '.$basefilename.'.pdf');
 
