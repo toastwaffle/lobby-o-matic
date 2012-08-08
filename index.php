@@ -80,6 +80,14 @@
 </div>
 
 <div data-role="panel" data-id="menu">
+	<div data-role="page" id="menu">
+		<div data-role="header" data-theme="e">
+			<h1>Bill</h1>
+		</div><!-- /header -->
+		<div data-role="content" data-theme="d">
+			<p>Select a bill to the right and some information about it will appear here.</p>
+		</div><!-- /content -->
+	</div><!-- /page -->
 	<?php echo(implode(PHP_EOL,$billPopups)); ?>
 </div>
 
