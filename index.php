@@ -50,10 +50,13 @@
 				?>
 			</ul>
 		</div>
-		<?php
-			echo(implode(PHP_EOL, $billPopups).PHP_EOL);
-		?>
 	</div><!-- /content -->
+
+<?php include('footer.php'); ?>
+
+	<?php
+		echo(implode(PHP_EOL, $billPopups).PHP_EOL);
+	?>
 
 </div><!-- /page -->
 
