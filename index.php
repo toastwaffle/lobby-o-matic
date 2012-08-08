@@ -18,7 +18,7 @@
 </head> 
 <body> 
 
-<div data-role="page">
+<div data-role="page" id="main">
 
 	<div data-role="header">
 		<h1>Lobby-O-Matic</h1>
@@ -39,8 +39,18 @@
 				if (!$result) {
 					die($conn->error);
 				}
+				$billPopups = array();
 				while ($row = $result->fetch_assoc()) {
-					echo('<li><a href="bills.php?billid='.$row['BillID'].'" data-rel="popup" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
+					echo('<li><a href="#billPopup'.$row['BillID'].'" data-rel="dialog" data-transition="pop" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
+					$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
+										<div data-role="header" data-theme="e">
+											<h1>'.$row['Title'].'</h1>
+										</div><!-- /header -->
+										<div data-role="content" data-theme="d">
+											<p>'.$row['Description'].'</p>
+											<p><a data-role="button" data-direction="forward" href="bills.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+										</div><!-- /content -->
+									</div><!-- /page -->';
 				}
 			?>
 		</ul>
@@ -49,6 +59,8 @@
 <?php include('footer.php'); ?>
 
 </div><!-- /page -->
+
+<?php echo(implode(PHP_EOL,$billPopups)); ?>
 
 </body>
 </html>
