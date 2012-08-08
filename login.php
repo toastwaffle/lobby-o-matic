@@ -104,12 +104,15 @@ EMAILTEXT;
 	<head> 
 	<title>Lobby-O-Matic</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<link rel="stylesheet" href="./resources/jquery.mobile-1.1.1.css" />
-	<link rel="stylesheet" href="./resources/jquery.mobile.structure-1.1.1.css" />
-	<link rel="stylesheet" href="./resources/jquery.mobile.theme-1.1.1.css" />
 	<link rel="stylesheet" href="./resources/style.css" />
-	<script src="./resources/jquery-1.7.1.min.js"></script>
-	<script src="./resources/jquery.mobile-1.1.1.min.js"></script>
+	<link rel="stylesheet" href="./resources/jquery.mobile.css" />
+	<link rel="stylesheet" href="./resources/jquery.mobile.splitview.css" />
+	<link rel="stylesheet"  href="./resources/jquery.mobile.grids.collapsible.css" />
+	<script type="text/javascript" src="./resources/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="./resources/jquery.mobile.splitview.js"></script>
+	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
+	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
+	<script type="text/javascript" src="./resources/iscroll.js"></script>
 </head> 
 <body> 
 
