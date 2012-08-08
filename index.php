@@ -1,7 +1,7 @@
 <?php
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
-		header('Location: login.php?redirect=index.php');
+		header('Location: login.php?redirect=index.php&pleaselogin');
 	}
 ?>
 <!DOCTYPE html> 
@@ -23,7 +23,8 @@
 		<h1>Lobby-O-Matic</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" data-theme="b">	
+	<div data-role="content" data-theme="b">
+		<?php echo($messages); ?>	
 		<p>Welcome to Lobby-O-Matic. This is the place to get in contact with MPs regarding either upcoming Bills in Parliament or the topic of your choice.</p>
 		<p>To get started, search for a topic or select a bill below</p>
 		<form action="search.php" method="post">

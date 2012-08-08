@@ -8,6 +8,18 @@
 	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrs2012');
 	$guardianapikey = 'dmkvkaamsuthc484cy53xu3z';
 
+    $messages = ''; // Used to display messages on every page.
+
+    if isset($_GET['loggedin']) {
+        $messages .= '<p class="success">You are now logged in.</p>';
+    }
+    if isset($_GET['registered']) {
+        $messages .= '<p class="success">You have been registered. Please check your email to confirm your address.</p>';
+    }
+    if isset($_GET['pleaselogin']) {
+        $messages .= '<p class="warning">Please log in to use the system.</p>';
+    }
+
     function shutdown() {
         global $conn;
         $conn->close();
