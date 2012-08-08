@@ -4,6 +4,39 @@
 		header('Location: login.php?redirect=index.php&pleaselogin');
 	}
 ?>
+<?php
+	$result = $conn->query('SELECT Title,Description,BillID FROM Bills ORDER BY Title ASC');
+	if (!$result) {
+		die($conn->error);
+	}
+	$billRows = array();
+	$billPopups = array();
+	while ($row = $result->fetch_assoc()) {
+		if (strlen($row['Description']) > 0) {
+			$billRows = '<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL;
+			$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
+								<div data-role="header" data-theme="e">
+									<h1>'.$row['Title'].'</h1>
+								</div><!-- /header -->
+								<div data-role="content" data-theme="d">
+									<p>'.$row['Description'].'</p>
+									<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+								</div><!-- /content -->
+							</div><!-- /page -->';
+		} else {
+			$billRows = '<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop">'.$row['Title'].'</a></li>'.PHP_EOL;
+			$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
+								<div data-role="header" data-theme="e">
+									<h1>'.$row['Title'].'</h1>
+								</div><!-- /header -->
+								<div data-role="content" data-theme="d">
+									<p>There is no description for this bill.</p>
+									<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+								</div><!-- /content -->
+							</div><!-- /page -->';
+		}
+	}
+?>
 <!DOCTYPE html> 
 <html> 
 	<head> 
@@ -20,65 +53,7 @@
 	<script type="text/javascript" src="./resources/iscroll.js"></script>
 </head> 
 <body> 
-
-<div data-role="panel" data-id="main">
-<div data-role="page" id="main">
-
-	<div data-role="header">
-		<h1>Lobby-O-Matic</h1>
-	</div><!-- /header -->
-
-	<div data-role="content" data-theme="b">
-		<?php echo($messages); ?>	
-		<p>Welcome to Lobby-O-Matic. This is the place to get in contact with MPs regarding either upcoming Bills in Parliament or the topic of your choice.</p>
-		<p>To get started, search for a topic or select a bill below</p>
-		<form action="writemessage.php" method="post">
-			<input type="text" name="searchterm" />
-			<input type="submit" data-icon="search" value="Search" />
-		</form>
-		<br />
-		<ul data-role="listview" data-inset="true" data-filter="true">
-			<?php
-				$result = $conn->query('SELECT Title,Description,BillID FROM Bills ORDER BY Title ASC');
-				if (!$result) {
-					die($conn->error);
-				}
-				$billPopups = array();
-				while ($row = $result->fetch_assoc()) {
-					if (strlen($row['Description']) > 0) {
-						echo('<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
-						$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
-											<div data-role="header" data-theme="e">
-												<h1>'.$row['Title'].'</h1>
-											</div><!-- /header -->
-											<div data-role="content" data-theme="d">
-												<p>'.$row['Description'].'</p>
-												<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
-											</div><!-- /content -->
-										</div><!-- /page -->';
-					} else {
-						echo('<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop">'.$row['Title'].'</a></li>'.PHP_EOL);
-						$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
-											<div data-role="header" data-theme="e">
-												<h1>'.$row['Title'].'</h1>
-											</div><!-- /header -->
-											<div data-role="content" data-theme="d">
-												<p>There is no description for this bill.</p>
-												<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
-											</div><!-- /content -->
-										</div><!-- /page -->';
-					}
-				}
-			?>
-		</ul>
-	</div><!-- /content -->
-
-<?php include('footer.php'); ?>
-
-</div><!-- /page -->
-
-</div>
-
+	
 <div data-role="panel" data-id="menu">
 	<div data-role="page" id="menu">
 		<div data-role="header" data-theme="e">
@@ -89,6 +64,33 @@
 		</div><!-- /content -->
 	</div><!-- /page -->
 	<?php echo(implode(PHP_EOL,$billPopups)); ?>
+</div>
+
+<div data-role="panel" data-id="main">
+	<div data-role="page" id="main">
+
+		<div data-role="header">
+			<h1>Lobby-O-Matic</h1>
+		</div><!-- /header -->
+
+		<div data-role="content" data-theme="b">
+			<?php echo($messages); ?>	
+			<p>Welcome to Lobby-O-Matic. This is the place to get in contact with MPs regarding either upcoming Bills in Parliament or the topic of your choice.</p>
+			<p>To get started, search for a topic or select a bill below</p>
+			<form action="writemessage.php" method="post">
+				<input type="text" name="searchterm" />
+				<input type="submit" data-icon="search" value="Search" />
+			</form>
+			<br />
+			<ul data-role="listview" data-inset="true" data-filter="true">
+				<?php echo(implode(PHP_EOL,$billRows)); ?>
+			</ul>
+		</div><!-- /content -->
+
+	<?php include('footer.php'); ?>
+
+	</div><!-- /page -->
+
 </div>
 
 </body>
