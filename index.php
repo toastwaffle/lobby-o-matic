@@ -46,7 +46,7 @@
 				$billPopups = array();
 				while ($row = $result->fetch_assoc()) {
 					if (strlen($row['Description']) > 0) {
-						echo('<li><a href="#billPopup'.$row['BillID'].'" data-rel="dialog" data-transition="pop" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
+						echo('<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop" title="'.$row['Description'].'">'.$row['Title'].'</a></li>'.PHP_EOL);
 						$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
 											<div data-role="header" data-theme="e">
 												<h1>'.$row['Title'].'</h1>
@@ -57,7 +57,7 @@
 											</div><!-- /content -->
 										</div><!-- /page -->';
 					} else {
-						echo('<li><a href="#billPopup'.$row['BillID'].'" data-rel="dialog" data-transition="pop">'.$row['Title'].'</a></li>'.PHP_EOL);
+						echo('<li><a href="#billPopup'.$row['BillID'].'" data-panel="menu" data-transition="pop">'.$row['Title'].'</a></li>'.PHP_EOL);
 						$billPopups[] = '<div data-role="page" id="billPopup'.$row['BillID'].'">
 											<div data-role="header" data-theme="e">
 												<h1>'.$row['Title'].'</h1>
@@ -79,6 +79,9 @@
 
 </div>
 
-<?php echo(implode(PHP_EOL,$billPopups)); ?>
+<div data-role="panel" data-id="menu">
+	<?php echo(implode(PHP_EOL,$billPopups)); ?>
+</div>
+
 </body>
 </html>
