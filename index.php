@@ -77,8 +77,8 @@
 
 </div><!-- /page -->
 
-<?php echo(implode(PHP_EOL,$billPopups)); ?>
 </div>
 
+<?php echo(implode(PHP_EOL,$billPopups)); ?>
 </body>
 </html>
