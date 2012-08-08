@@ -47,10 +47,12 @@
 								<p><a href="bills.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
 							</div>';
 					}
-					echo(implode(PHP_EOL, $billPopups).PHP_EOL);
 				?>
 			</ul>
 		</div>
+		<?php
+			echo(implode(PHP_EOL, $billPopups).PHP_EOL);
+		?>
 	</div><!-- /content -->
 
 </div><!-- /page -->
