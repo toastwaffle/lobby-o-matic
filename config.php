@@ -57,7 +57,7 @@
         }
     }
 
-    function getBillText($url) {
+    function getBillText($url,&$pdfurl) {
         $documentsurl = str_replace('.html', '/documents.html', $url);
 
         $ch = curl_init();
@@ -71,6 +71,8 @@
         preg_match('/http:\/\/www.publications.parliament.uk\/.*?.pdf/', $documentshtml, $matches);
 
         $basefilename = '/tmp/bill'.(string)time();
+
+        $pdfurl = $matches[0]
 
         downloadFile($matches[0],$basefilename.'.pdf');
 

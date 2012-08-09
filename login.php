@@ -74,7 +74,7 @@
 				$messages .= '<p class="error">An error occurred. Please try again later.</p>';
 				error_log('MySQL Error: '.$conn->error.PHP_EOL,3,'/home/samuel/lobbyomatic.log');
 			} else {
-				$confirmlink = 'http://www.toastwaffle.com/lobby-o-matic/confirm.php?u='.$_POST['username'].'&key='.hash('sha512', $_POST['firstname'].$_POST['lastname'].$_POST['email']);
+				$confirmlink = urlencode('http://www.toastwaffle.com/lobby-o-matic/confirm.php?u='.$_POST['username'].'&key='.hash('sha512', $_POST['firstname'].$_POST['lastname'].$_POST['email']));
 				$emailtext = <<<EMAILTEXT
 Dear {$_POST['firstname']} {$_POST['lastname']},
 
