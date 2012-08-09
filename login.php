@@ -141,7 +141,7 @@ EMAILTEXT;
 	<div data-role="content" data-theme="b" style="padding-bottom: 200px;">
 		<div data-role="container" data-corners="true">
 			<h3>Log In</h3>
-			<form action="login.php" method="post">
+			<form action="login.php" method="post" data-ajax="false">
 				<?php
 					if (isset($_GET['redirect'])) {
 						echo('<input type="hidden" name="redirect" value="'.$_GET['redirect'].'" />'.PHP_EOL);
@@ -163,7 +163,7 @@ EMAILTEXT;
 		<br />
 		<div data-role="container" data-corners="true">
 			<h3>Register</h3>
-			<form action="login.php" method="post">
+			<form action="login.php" method="post" data-ajax="false">
 				<?php
 					if (isset($_GET['redirect'])) {
 						echo('<input type="hidden" name="redirect" value="'.$_GET['redirect'].'" />'.PHP_EOL);

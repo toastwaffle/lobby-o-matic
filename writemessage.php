@@ -45,6 +45,7 @@ iframe {
 	right:0px;
 	width:100%;
 	border:0px;
+	height: 75%;
 }
 	</style>
 </head> 
