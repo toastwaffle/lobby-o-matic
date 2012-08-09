@@ -116,6 +116,16 @@ EMAILTEXT;
 </head> 
 <body> 
 
+
+<div data-role="panel" data-id="menu">
+	<div data-role="page" id="menu">
+		<div data-role="content">	
+			<?php echo($messages); ?>
+			<h2>Please log in or register below.</h2>
+		</div>
+	</div>
+</div>
+
 <div data-role="panel" data-id="main">
 <div data-role="page" id="main">
 
@@ -123,9 +133,7 @@ EMAILTEXT;
 		<h1>Lobby-O-Matic - Login</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" data-theme="b" style="margin-bottom: 200px;">
-		<?php echo($messages); ?>
-		<h2>Please log in or register below.</h2>
+	<div data-role="content" data-theme="b" style="padding-bottom: 200px;">
 		<div data-role="container" data-corners="true">
 			<h3>Log In</h3>
 			<form action="login.php" method="post">
