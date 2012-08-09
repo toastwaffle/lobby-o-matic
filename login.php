@@ -194,9 +194,10 @@ EMAILTEXT;
 				</div>
 			</form>
 		</div>
-	</div><!-- /content -->
 
-<?php include('footer.php'); ?>
+		<?php include('footer.php'); ?>
+		
+	</div><!-- /content -->
 
 </div><!-- /page -->
 </div>
