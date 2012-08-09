@@ -109,6 +109,11 @@ EMAILTEXT;
 	<link rel="stylesheet" href="./resources/jquery.mobile.splitview.css" />
 	<link rel="stylesheet"  href="./resources/jquery.mobile.grids.collapsible.css" />
 	<script type="text/javascript" src="./resources/jquery-1.7.1.js"></script>
+	<script type="text/javascript">
+		$(document).bind("mobileinit", function(){
+			 $.mobile.ignoreContentEnabled = true;
+		});
+	</script>
 	<script type="text/javascript" src="./resources/jquery.mobile.splitview.js"></script>
 	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
 	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
@@ -127,7 +132,7 @@ EMAILTEXT;
 </div>
 
 <div data-role="panel" data-id="main">
-<div data-role="page" id="main">
+<div data-role="page" id="main" data-ajax="false">
 
 	<div data-role="header">
 		<h1>Lobby-O-Matic - Login</h1>
