@@ -123,7 +123,7 @@ EMAILTEXT;
 		<h1>Lobby-O-Matic - Login</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" data-theme="b">
+	<div data-role="content" data-theme="b" style="margin-bottom: 200px;">
 		<?php echo($messages); ?>
 		<h2>Please log in or register below.</h2>
 		<div data-role="container" data-corners="true">
@@ -143,7 +143,7 @@ EMAILTEXT;
 					<label for="loginpassword">Password: </label><input type="password" name="password" id="loginpassword" placeholder="Password" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<input type="submit" data-icon="star" name="login" value="Log In" />
+					<input type="submit" data-icon="star" name="login" value="Log In" data-ajax="false" />
 				</div>
 			</form>
 		</div>
@@ -177,7 +177,7 @@ EMAILTEXT;
 					<label for="repeat">Repeat Password: </label><input type="password" name="repeat" id="repeat" placeholder="Repeat Password" />
 				</div>
 				<div data-role="fieldcontain" class="ui-hide-label">
-					<input type="submit" data-icon="star" name="register" value="Register" />
+					<input type="submit" data-icon="star" name="register" value="Register" data-ajax="false" />
 				</div>
 			</form>
 		</div>
