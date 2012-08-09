@@ -8,6 +8,27 @@
 	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrs2012');
 	$guardianapikey = 'dmkvkaamsuthc484cy53xu3z';
 
+    $messages = ''; // Used to display messages on every page.
+
+    if (isset($_GET['loggedin'])) {
+        $messages .= '<p class="success">You are now logged in.</p>';
+    }
+    if (isset($_GET['registered'])) {
+        $messages .= '<p class="success">You have been registered. Please check your email to confirm your address.</p>';
+    }
+    if (isset($_GET['pleaselogin'])) {
+        $messages .= '<p class="warning">Please log in to use the system.</p>';
+    }
+    if (isset($_GET['noconfirm'])) {
+        $messages .= '<p class="warning">Sorry, we couldn\'t confirm your email. Please go to your settings to resend the confirmation email.</p>';
+    }
+    if (isset($_GET['confirmed'])) {
+        $messages .= '<p class="success">You\'re email address has been confirmed.</p>';
+    }
+    if (isset($_GET['error'])) {
+        $messages .= '<p class="error">An error occurred. Please try again later.</p>';
+    }
+
     function shutdown() {
         global $conn;
         $conn->close();

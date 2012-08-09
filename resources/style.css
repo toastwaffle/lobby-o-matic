@@ -1,0 +1,21 @@
+.success {
+	border: 2px solid #090;
+	padding: 5px;
+	background-color: #dfd;
+	color: #090;
+	font-weight: bold;
+}
+.error {
+	border: 2px solid #f00;
+	padding: 5px;
+	background-color: #fdd;
+	color: #f00;
+	font-weight: bold;
+}
+.warning {
+	border: 2px solid #f60;
+	padding: 5px;
+	background-color: #fd9;
+	color: #f60;
+	font-weight: bold;
+}
