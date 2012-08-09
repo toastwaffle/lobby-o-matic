@@ -20,7 +20,7 @@
 								</div><!-- /header -->
 								<div data-role="content" data-theme="d">
 									<p>'.$row['Description'].'</p>
-									<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+									<p><a data-ajax="false" data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
 								</div><!-- /content -->
 							</div><!-- /page -->';
 		} else {
@@ -31,7 +31,7 @@
 								</div><!-- /header -->
 								<div data-role="content" data-theme="d">
 									<p>There is no description for this bill.</p>
-									<p><a data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
+									<p><a data-ajax="false" data-role="button" data-direction="forward" href="writemessage.php?billid='.$row['BillID'].'">Write to MPs about this Bill</a></p>
 								</div><!-- /content -->
 							</div><!-- /page -->';
 		}
