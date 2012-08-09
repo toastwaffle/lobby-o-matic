@@ -72,7 +72,7 @@
 
         $basefilename = '/tmp/bill'.(string)time();
 
-        $pdfurl = $matches[0]
+        $pdfurl = $matches[0];
 
         downloadFile($matches[0],$basefilename.'.pdf');
 
