@@ -73,7 +73,7 @@ iframe {
 			<h1>Letter</h1>
 		</div><!-- /header -->
 		<div data-role="content" data-theme="d">
-			<form method="post" action="./sendmessage.php?billid=<?php echo($bill[0][0]); ?>" data-ajax="false">
+			<form method="post" action="./sendmessage.php?billid=<?php echo($bill[0][0]); ?>">
 				Category:
 				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val() + '&billid=<?php echo($bill[0][0]); ?>', function() {$('#chosepolitician').trigger('create');});">
 					<option value="0">Recommended</option><?php
@@ -108,7 +108,7 @@ iframe {
 		<div data-role="header">
 			<a href="./" data-ajax="false" class="ui-btn-active">Back</a>
 			<h1>Lobby-O-Matic</h1>
-			<a href="./logout.php" data-ajax="false" style="float:right;">Logout</a>
+			<a href="./logout/" data-ajax="false" style="float:right;">Logout</a>
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b" style="padding:0;">
