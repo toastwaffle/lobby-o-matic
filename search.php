@@ -9,7 +9,7 @@
 
 	function getRelatedPoliticians($searchterm, $limit) {
 		global $conn;
-		$longquery = sprintf("select Politicians.*, MATCH(Politicians.TopWords) AGAINST ('%s') as score from Politicians ORDER BY score DESC",$conn->real_escape_string($searchterm));
+		$longquery = sprintf("select Politicians.*, MATCH(Politicians.TopWords) AGAINST ('%s') as score from Politicians ORDER BY score DESC LIMIT 0, %u",$conn->real_escape_string($searchterm), $limit);
 		return query($longquery);
 	}
 	
