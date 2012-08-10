@@ -98,7 +98,7 @@ iframe {
 			<h1>Lobby-O-Matic</h1>
 		</div><!-- /header -->
 
-		<div data-role="content" data-theme="b">
+		<div data-role="content" data-theme="b" style="padding:0;">
 			<div style="height:25%;overflow:auto;padding-left:1pc;padding-right:1pc;">
 				<p class="ui-body-e" style="padding:0.1pc;"><?php echo($bill[0][2]); ?></p>
 				<p><?php echo($bill[0][3]); ?></p>
@@ -109,7 +109,7 @@ iframe {
 					} ?>
 				</ul>
 			</div>
-			<p><iframe src="http://docs.google.com/viewer?url=<?php echo(urlencode($bill[0][5])); ?>&embedded=true" /></p>
+			<p><iframe src="http://docs.google.com/viewer?url=<?php echo(urlencode($bill[0][5])); ?>&embedded=true"></iframe></p>
 		</div><!-- /content -->
 
 	<?php include('footer.php'); ?>
