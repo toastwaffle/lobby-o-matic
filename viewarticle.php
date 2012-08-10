@@ -163,7 +163,9 @@
 		</style>
 
 		<div data-role="header">
+			<a href="javascript:history.go(-1);" data-ajax="false" class="ui-btn-active">Back</a>
 			<h1>Lobby-O-Matic</h1>
+			<a href="./logout.php" data-ajax="false" style="float:right;">Logout</a>
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b">

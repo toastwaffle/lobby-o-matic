@@ -106,7 +106,7 @@ iframe {
 	<div data-role="page" id="main">
 
 		<div data-role="header">
-			<a href="./" data-ajax="false" class="ui-btn-active">Back</a>
+			<a href="javascript:history.go(-1);" data-ajax="false" class="ui-btn-active">Back</a>
 			<h1>Lobby-O-Matic</h1>
 			<a href="./logout.php" data-ajax="false" style="float:right;">Logout</a>
 		</div><!-- /header -->
