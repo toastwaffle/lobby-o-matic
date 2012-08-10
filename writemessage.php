@@ -26,7 +26,7 @@
 		$bill = query("select BillID, Link, Title, Description, BillText, BillPDFLoc from Bills where BillID = 1");
 	}
 
-	$articles = query("SELECT id,title,standfirst FROM Articles WHERE billid = ".$bill[0][1]);
+	$articles = query("SELECT id,title,standfirst FROM Articles WHERE billid = ".$bill[0][0]);
 ?>
 <!DOCTYPE html> 
 <html> 
