@@ -29,7 +29,10 @@
         $messages .= '<p class="error">An error occurred. Please try again later.</p>';
     }
     if (isset($_GET['entersearch'])) {
-        $messages .= '<p class="error">Please enter a search term.</p>';
+        $messages .= '<p class="warning">Please enter a search term.</p>';
+    }
+    if (isset($_GET['selectbill'])) {
+        $messages .= '<p class="warning">Please select a bill.</p>';
     }
 
     function shutdown() {

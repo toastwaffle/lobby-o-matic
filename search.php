@@ -23,10 +23,9 @@
 
 	$guardianarticles = array();
 
-	$words = extractCommonWords($billtext,2);
 	$guardianurl = sprintf('http://content.guardianapis.com/search?q=%s'.
 		'&format=json&show-fields=headline%%2Cbody%%2Cstandfirst&show-references=all&api-key=%s',
-		implode('+', array_keys($words)),
+		urlencode($_POST['searchterm']),
 		$guardianapikey);
 	echo $guardianurl;
 	$guardianresult = file_get_contents($guardianurl);
@@ -99,7 +98,7 @@
 		<div data-role="content" data-theme="b">
 			<h2>Article Search Results</h2>
 			<ul data-role="listview" data-inset="true" data-filter="true" id="articles-list">
-				<?php foreach ($articles as $article) {
+				<?php foreach ($guardianarticles as $article) {
 					echo('<li><a href="viewarticle.php?articleurl='.urlencode($article->id).'" data-panel="main" alt="'.$article->fields->standfirst.'">'.$article->fields->headline.'</a></li>'.PHP_EOL);
 				} ?>
 			</ul>

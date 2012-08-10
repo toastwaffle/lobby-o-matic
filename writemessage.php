@@ -1,7 +1,18 @@
 <?php
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
+		if (isset($_GET['billid'])) {
+			$_SESSION['billid'] = $_GET['billid'];
+		}
 		header('Location: login.php?redirect=writemessage.php&pleaselogin');
+	}
+
+	if (!isset($_GET['billid'])) {
+		if (isset($_SESSION['billid'])) {
+			$_GET['billid'] = $_SESSION['billid'];
+		} else {
+			header('Location: index.php?selectbill');
+		}
 	}
 	
 	function getRelatedPoliticians($billid, $limit) {
