@@ -51,7 +51,7 @@
 				$entitieslist .= '<li onclick="showsublist('.$entityid.');">'.$entity['type'].' &gt;&gt;<ul id="entitysublist-'.$entityid.'" style="display: none;">'.PHP_EOL;
 			}
 			$entityid++;
-			$entitieslist .= '<li id="entity-'.$entityid.'"><a href="javascript:highlightentity('.$entityid.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</a></li>'.PHP_EOL;
+			$entitieslist .= '<li id="entity-'.$entityid.'" onclick="highlightentity('.$id.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</li>'.PHP_EOL;
 			$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
 			$instanceresult = $conn->query($query);
 			$instanceignores = array("i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "his", "hers", "mine", "yours", "ours", "theirs");
@@ -132,7 +132,7 @@
 				$entitieslist .= '<li onclick="showsublist('.$id.');">'.$entitytype.' &gt;&gt;<ul id="entitysublist-'.$id.'" style="display: none;">'.PHP_EOL;
 				foreach ($entities as $entityname => $entityinfo) {
 					$id++;
-					$entitieslist .= '<li id="entity-'.$id.'"><a href="javascript:highlightentity('.$id.');">'.$entityname.' (Relevance Score: '.$entityinfo['relevance'].')</a></li>'.PHP_EOL;
+					$entitieslist .= '<li id="entity-'.$id.'" onclick="highlightentity('.$id.');">'.$entityname.' (Relevance Score: '.$entityinfo['relevance'].')</li>'.PHP_EOL;
 					foreach ($entityinfo['instances'] as $instance) {
 						$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
 						$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
