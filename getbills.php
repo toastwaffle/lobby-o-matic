@@ -1,6 +1,6 @@
 <?php
 
-	include('config.php');
+	include('config2.php');
 
 	$array_map = function($item) {
 		if ($item->fields->body == '<!-- Redistribution rights for this field are unavailable -->') {
