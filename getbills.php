@@ -1,6 +1,6 @@
 <?php
 
-	include('config2.php');
+	include('config.php');
 
 	$uasort_function = function($a,$b) {
 		if ($a['relevance'] > $b['relevance']) {
