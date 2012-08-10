@@ -48,20 +48,18 @@
 				} else {
 					$first = false;
 				}
-				$entitieslist .= '<li onclick="showsublist('.$entityid.');">'.$entitytype.' &gt;&gt;<ul id="entitysublist-'.$entityid.'" style="display: none;">'.PHP_EOL;
+				$entitieslist .= '<li onclick="showsublist('.$entityid.');">'.$entity['type'].' &gt;&gt;<ul id="entitysublist-'.$entityid.'" style="display: none;">'.PHP_EOL;
 			}
-			foreach ($entities as $entityname => $entityinfo) {
-				$entityid++;
-				$entitieslist .= '<li id="entity-'.$entityid.'"><a href="javascript:highlightentity('.$entityid.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</a></li>'.PHP_EOL;
-				$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
-				$instanceresult = $conn->query($query);
-				while ($instance = $instanceresult->fetch_assoc()) {
-					$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
-					$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
-					$newdocument = preg_replace($search, $replace, $document);
-					if ($newdocument !== null) {
-						$document = $newdocument;
-					}
+			$entityid++;
+			$entitieslist .= '<li id="entity-'.$entityid.'"><a href="javascript:highlightentity('.$entityid.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</a></li>'.PHP_EOL;
+			$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
+			$instanceresult = $conn->query($query);
+			while ($instance = $instanceresult->fetch_assoc()) {
+				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
+				$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
+				$newdocument = preg_replace($search, $replace, $document);
+				if ($newdocument !== null) {
+					$document = $newdocument;
 				}
 			}
 		}
