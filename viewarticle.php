@@ -7,7 +7,7 @@
 		if (isset($_GET['articleurl'])) {
 			$_SESSION['articleurl'] = $_GET['articleurl'];
 		}
-		header('Location: login.php?redirect=search.php&pleaselogin');
+		header('Location: login.php?redirect=viewarticle.php&pleaselogin');
 	}
 	
 	if ((!isset($_GET['articleid'])) && (!isset($_GET['articleurl']))) {
@@ -32,6 +32,7 @@
 		}
 		$article = $result->fetch_assoc($result);
 		$document = $article['body'];
+		$title = $article['title'];
 		$query = sprintf('SELECT * FROM Entities WHERE articleid = %u GROUP BY type ORDER BY relevance DESC',$article['id']);
 		$result = $conn->query($query);
 		$entityid = 0;
@@ -69,6 +70,7 @@
 		$guardianresult = file_get_contents($guardianurl);
 		$result = json_decode($guardianresult);
 		if ($result->response->total < 1) {
+			$title = $result->response->content->fields->headline;
 			$document = $result->response->content->fields->body;
 
 			$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
