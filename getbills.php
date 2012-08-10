@@ -123,7 +123,7 @@
 
 							foreach($entity['instances'] as $instance) {
 								query(sprintf("INSERT INTO EntityInstances (entityid, prefix, exact, suffix, offset, length) VALUES ('%s','%s','%s','%s','%s','%s')",
-									$conn->real_escape_string($entity),
+									$conn->real_escape_string($entityid),
 									$conn->real_escape_string($instance['prefix']),
 									$conn->real_escape_string($instance['exact']),
 									$conn->real_escape_string($instance['suffix']),
