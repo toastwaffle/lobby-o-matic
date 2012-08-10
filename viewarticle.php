@@ -56,7 +56,7 @@
 			$instanceresult = $conn->query($query);
 			while ($instance = $instanceresult->fetch_assoc()) {
 				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
-				$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
+				$replace = '<span class="highlighter-'.$entityid.'">'.trim($instance['exact']).'</span>';
 				$newdocument = preg_replace($search, $replace, $document);
 				if ($newdocument !== null) {
 					$document = $newdocument;
