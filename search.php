@@ -1,7 +1,10 @@
 <?php
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
-		header('Location: login.php?redirect=writemessage.php&pleaselogin');
+		if (isset($_POST['searchterm'])) {
+			$_SESSION['searchterm'] = $_POST['searchterm'];
+		}
+		header('Location: login.php?redirect=search.php&pleaselogin');
 	}
 	
 	function getRelatedPoliticians($billid, $limit) {
@@ -21,12 +24,29 @@
 		return query($longquery);
 	}
 	
-	$bill = query("select BillID, Link, Title, Description, BillText, BillPDFLoc from Bills where BillID = ".$conn -> escape_string($_GET["billid"]));
-	if (count($bill) == 0) {
-		$bill = query("select BillID, Link, Title, Description, BillText, BillPDFLoc from Bills where BillID = 1");
+	if (!isset($_POST['searchterm'])) {
+		if (isset($_SESSION['searchterm'])) {
+			$_POST['searchterm'] = $_SESSION['searchterm'];
+		} else {
+			header('Location: index.php?entersearch');
+		}
 	}
 
-	$articles = query("SELECT id,title,standfirst FROM Articles WHERE billid = ".$bill[0][1]);
+	$guardianarticles = array();
+
+	$words = extractCommonWords($billtext,2);
+	$guardianurl = sprintf('http://content.guardianapis.com/search?q=%s'.
+		'&format=json&show-fields=headline%%2Cbody%%2Cstandfirst&show-references=all&api-key=%s',
+		implode('+', array_keys($words)),
+		$guardianapikey);
+	echo $guardianurl;
+	$guardianresult = file_get_contents($guardianurl);
+	$result = json_decode($guardianresult);
+	if ($result->response->total > 0) {
+		$guardianarticles = array_merge($guardianarticles,$result->response->results);
+	}
+
+	$guardianarticles = array_filter(array_map($array_map, $guardianarticles),$array_filter);
 ?>
 <!DOCTYPE html> 
 <html> 
@@ -96,10 +116,12 @@ iframe {
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b">
-			<h2>Article Search Results</h2>
+			<p><?php echo($bill[0][2]); ?></p>
+			<p><?php echo($bill[0][3]); ?></p>
+			<h2>Related Articles</h2>
 			<ul data-role="listview" data-inset="true" data-filter="true" id="articles-list">
-				<?php foreach ($guardianarticles as $article) {
-					echo('<li><a href="viewarticle.php?articleid='.$article[0].'" data-panel="main" alt="'.$article[2].'">'.$article[1].'</a></li>'.PHP_EOL);
+				<?php foreach ($articles as $article) {
+					echo('<li><a href="viewarticle.php?articleurl='.urlencode($article->id).'" data-panel="main" alt="'.$article->fields->standfirst.'">'.$article->fields->headline.'</a></li>'.PHP_EOL);
 				} ?>
 			</ul>
 			<p><iframe src="http://docs.google.com/viewer?url=<?php echo(urlencode($bill[0][5])); ?>&embedded=true" /></p>

@@ -28,6 +28,9 @@
     if (isset($_GET['error'])) {
         $messages .= '<p class="error">An error occurred. Please try again later.</p>';
     }
+    if (isset($_GET['entersearch'])) {
+        $messages .= '<p class="error">Please enter a search term.</p>';
+    }
 
     function shutdown() {
         global $conn;
@@ -140,4 +143,20 @@
         $wordCountArr = array_slice($wordCountArr, 0, $count);
         return $wordCountArr;
     }
+
+    $array_map = function($item) {
+        if ($item->fields->body == '<!-- Redistribution rights for this field are unavailable -->') {
+            return null;
+        }
+        $item->fields->body = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $item->fields->body);
+        $position = strpos($item->fields->body, '<div class="gu_advert">');
+        if (($position !== False) && ($position > 0)) {
+            $item->fields->body = substr($item->fields->body, 0, $position);
+        }
+        return $item;
+    };
+
+    $array_filter = function($item) {
+        return ($item === null) ? false : true;
+    };
 ?>
