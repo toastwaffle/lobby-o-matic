@@ -77,7 +77,7 @@
 			<?php echo($messages); ?>	
 			<p>Welcome to Lobby-O-Matic. This is the place to get in contact with MPs regarding either upcoming Bills in Parliament or the topic of your choice.</p>
 			<p>To get started, search for a topic or select a bill below</p>
-			<form action="writemessage.php" method="post" data-ajax="false">
+			<form action="search.php" method="post" data-ajax="false">
 				<input type="text" name="searchterm" />
 				<input type="submit" data-icon="search" value="Search" />
 			</form>
