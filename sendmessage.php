@@ -82,12 +82,12 @@ EMAILTEXT;
 
 </body>
 </html><?php
+	query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($_POST["messagebody"])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$conn->real_escape_string($_POST["messagebody"])."', 'sent')");
+	query("insert into Threads (threadkey, initialuser) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].")");
+	$tid = $conn -> insert_id;
 	foreach ($toarray as $key => $to) {
-	echo("hi");
 		$emailtext[$key] = wordwrap($emailtext[$key], 70);
-		query("insert into Threads (threadkey, initialuser) values ('".md5($emailtext[$key])."', ".$_SESSION["id"].")");
-		query("insert into Watchers (threadid, userid) values (".$conn -> insert_id.", ".$_SESSION["id"].")");
-		query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($emailtext[$key])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$emailtext[$key]."', 'sent')");
+		query("insert into Watchers (threadid, userid) values (".$tid.", ".$_SESSION["id"].")");
 		mail(
 			//$to
 			//"madman.bob@hotmail.co.uk"
