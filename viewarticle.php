@@ -44,7 +44,7 @@
 			if ($entity['type'] != $lasttype) {
 				$lasttype = $entity['type'];
 				if (!$first) {
-					$entitieslist .= '</ul><li>'.PHP_EOL;
+					$entitieslist .= '</ul></li>'.PHP_EOL;
 				} else {
 					$first = false;
 				}
@@ -161,32 +161,32 @@
 	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
 	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
 	<script type="text/javascript" src="./resources/iscroll.js"></script>
-	<script type="text/javascript">
-	  function showsublist(id) {
-	    $("#entitysublist-"+id).toggle();
-	  }
-	  function highlightentity(id) {
-	  	if ($("#entity-"+id).hasClass('highlighted')) {
-	  		$('.highlighter-'+id).removeClass('highlighted');
-	  		$("#entity-"+id).removeClass('highlighted');
-	  		$("#entity-"+id).parent().show();
-	  	} else {
-	  		$('.highlighter-'+id).addClass('highlighted');
-	  		$("#entity-"+id).addClass('highlighted');	
-	  		$("#entity-"+id).parent().show();
-	  	}
-	  }
-	</script>
-	<style type="text/css">
-		span.highlighted {
-			border-top: 1px solid red;
-			border-bottom: 1px solid red;
-			background-color: #FCC;
-		}
-	</style>
 </head> 
 <body>
 	<div data-role="page" id="main">
+		<script type="text/javascript">
+		  function showsublist(id) {
+		    $("#entitysublist-"+id).toggle();
+		  }
+		  function highlightentity(id) {
+		  	if ($("#entity-"+id).hasClass('highlighted')) {
+		  		$('.highlighter-'+id).removeClass('highlighted');
+		  		$("#entity-"+id).removeClass('highlighted');
+		  		$("#entity-"+id).parent().show();
+		  	} else {
+		  		$('.highlighter-'+id).addClass('highlighted');
+		  		$("#entity-"+id).addClass('highlighted');	
+		  		$("#entity-"+id).parent().show();
+		  	}
+		  }
+		</script>
+		<style type="text/css">
+			span.highlighted {
+				border-top: 1px solid red;
+				border-bottom: 1px solid red;
+				background-color: #FCC;
+			}
+		</style>
 
 		<div data-role="header">
 			<h1>Lobby-O-Matic</h1>
