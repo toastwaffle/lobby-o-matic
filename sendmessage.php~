@@ -1,4 +1,5 @@
 <?php
+	// Set buffer to true
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
 		header('Location: login.php?redirect=index.php&pleaselogin');
@@ -18,17 +19,16 @@
 	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
 	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
 	<script type="text/javascript" src="./resources/iscroll.js"></script>
-	
 </head> 
 <body> 
 
 <div data-role="panel" data-id="menu">
 	<div data-role="page" id="menu">
 		<div data-role="header" data-theme="e">
-			<h1>Message sent</h1>
+			<h1>Please wait...</h1>
 		</div><!-- /header -->
 		<div data-role="content" data-theme="d">
-			<p>Your message has been sent...</p>
+			<p>Sending message...</p>
 		</div><!-- /content -->
 	</div><!-- /page -->
 </div>
@@ -63,9 +63,8 @@ EMAILTEXT;
 			}
 		}
 	}
-	if (false) {
+	if (true) {
 		echo("<pre>");
-		print_r($_POST);
 		print_r($emailtext);
 		echo("\n\n");
 		print_r($toarray);
@@ -83,14 +82,9 @@ EMAILTEXT;
 </body>
 </html><?php
 	foreach ($toarray as $key => $to) {
-	echo("hi");
-		$emailtext[$key] = wordwrap($emailtext[$key], 70);
-		query("insert into Threads (threadkey, initialuser) values ('".md5($emailtext[$key])."', ".$_SESSION["id"].")");
-		query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($emailtext[$key])."', '".md5($_SESSION["firstname"])." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$emailtext[$key]."', 'sent')");
-		mail(
+		/*mail(
 			//$to
-			//"madman.bob@hotmail.co.uk"
-			"samuel.littley@toastwaffle.com"
-			, '[Lobby-O-Matic] '.$_SESSION["username"]." on the ".$bill[0][0]." bill", $emailtext[$key], 'From: lobbyomatic@toastwaffle.com\r\nReply-To: lobbyomatic+'.md5($emailtext[$key]).'@toastwaffle.com');
+			"madman.bob@hotmail.co.uk"
+			, '[Lobby-O-Matic] '.$_SESSION["username"]." on the ".$bill[0][0]." bill", $emailtext[$key], 'From: noreply@toastwaffle.com');*/
 	}
 ?>

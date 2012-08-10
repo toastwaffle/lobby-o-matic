@@ -90,7 +90,7 @@ iframe {
 	$relpols = getRelatedPoliticians($bill[0][0], 10);
 	foreach ($relpols as $rp) {
 		echo("
-					<input type=\"checkbox\" name=\"".$rp[0]."\" id=\"".$rp[0]."\" value=/\"".$rp[0]."\">
+					<input type=\"checkbox\" name=\"".$rp[0]."\" id=\"".$rp[0]."\" value=\"".$rp[0]."\">
 					<label style=\"font-size:0.5pc;\" for=\"".$rp[0]."\">".$rp[3]."</label>");
 	}
 	?>
