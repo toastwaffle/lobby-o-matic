@@ -2,12 +2,7 @@
     ini_set('display_errors','On');
     error_reporting(E_ALL);
 
-    session_start();
-    if($_REQUEST['page'] != $_SESSION['oldPage']) 
-        $_SESSION['oldURL'] = $_SESSION['newURL'];
-
-    $_SESSION['oldPage']     = $_REQUEST['page'];
-    $_SESSION['newURL']     = $_SERVER['REQUEST_URI'];  
+    session_start(); 
 
     global $conn,$guardianapikey;
 	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrstest');

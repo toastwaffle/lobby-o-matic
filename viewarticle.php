@@ -16,7 +16,7 @@
 		} else if (isset($_SESSION['articleurl'])) {
 			$_GET['articleurl'] = $_SESSION['articleurl'];
 		} else {
-			header('Location: '.$_SESSION['oldPage']);
+			header('Location: index.php');
 		}
 	}
 
@@ -24,11 +24,7 @@
 		$query = sprintf('SELECT * FROM Articles WHERE id = %u',$conn->real_escape_string($_GET['articleid']));
 		$result = $conn->query($query);
 		if (!$result) {
-			if (strpos($_SESSION['oldPage'], 'php?') !== False) {
-				header('Location: '.$_SESSION['oldPage'].'&articlenotfound');
-			} else {
-				header('Location: '.$_SESSION['oldPage'].'?articlenotfound');
-			}
+			header('Location: writemessage.php?articlenotfound');
 		}
 		$article = $result->fetch_assoc($result);
 		$document = $article['body'];
@@ -137,14 +133,10 @@
 				$entitieslist .= '</ul></li>'.PHP_EOL;
 			}
 		} else {
-			if (strpos($_SESSION['oldPage'], 'php?') !== False) {
-				header('Location: '.$_SESSION['oldPage'].'&articlenotfound');
-			} else {
-				header('Location: '.$_SESSION['oldPage'].'?articlenotfound');
-			}
+			header('Location: search.php?articlenotfound');
 		}
 	} else {
-		header('Location: '.$_SESSION['oldPage']);
+		header('Location: index.php');
 	}
 ?>
 <!DOCTYPE html> 
@@ -195,7 +187,7 @@
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b">
-			<h2><?php echo($article['title']); ?></h2>
+			<h2><?php echo($title); ?></h2>
 			<h3>Matched Entities</h3>
 			<p>Click to expand types, click on entity to highlight in text</p>
 			<ul id="entity-list">
