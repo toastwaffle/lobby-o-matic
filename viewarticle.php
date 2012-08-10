@@ -64,7 +64,7 @@
 		}
 	} else if (isset($_GET['articleurl'])) {
 		$guardianurl = sprintf('http://content.guardianapis.com/%s'.
-			'&format=json&show-fields=headline%%2Cbody&api-key=%s',
+			'?format=json&show-fields=headline%%2Cbody&api-key=%s',
 			$_GET['articleurl'],
 			$guardianapikey);
 		$guardianresult = file_get_contents($guardianurl);
