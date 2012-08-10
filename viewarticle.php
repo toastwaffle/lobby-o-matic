@@ -27,7 +27,11 @@
 			header('Location: writemessage.php?articlenotfound');
 		}
 		$article = $result->fetch_assoc($result);
-		$document = $article['body'];
+		$document = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $article['body']);
+		$position = strpos($document, '<div class="gu_advert">');
+		if (($position !== False) && ($position > 0)) {
+			$document = substr($document, 0, $position);
+		}
 		$title = $article['title'];
 		$query = sprintf('SELECT * FROM Entities WHERE articleid = %u GROUP BY type ORDER BY relevance DESC',$article['id']);
 		$result = $conn->query($query);
