@@ -54,7 +54,10 @@
 				while ($instance = $instanceresult->fetch_assoc()) {
 					$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
 					$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
-					$document = preg_replace($search, $replace, $document);
+					$newdocument = preg_replace($search, $replace, $document);
+					if ($newdocument !== null) {
+						$document = $newdocument;
+					}
 				}
 			}
 		}
@@ -127,7 +130,10 @@
 					foreach ($entityinfo['instances'] as $instance) {
 						$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
 						$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
-						$document = preg_replace($search, $replace, $document);
+						$newdocument = preg_replace($search, $replace, $document);
+						if ($newdocument !== null) {
+							$document = $newdocument;
+						}
 					}
 				}
 				$entitieslist .= '</ul></li>'.PHP_EOL;
