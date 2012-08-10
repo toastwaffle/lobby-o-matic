@@ -31,7 +31,7 @@
 			$pols = getRelatedPoliticians($_GET["billid"] + 0, 10);
 		}
 	} else {
-		$pols = getSearchtermPoliticians($_GET['searchterm'], $limit)
+		$pols = getSearchtermPoliticians($_GET['searchterm'], $limit);
 	}
 	
 	foreach ($pols as $p) {
