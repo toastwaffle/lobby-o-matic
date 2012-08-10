@@ -27,46 +27,12 @@
 			header('Location: writemessage.php?articlenotfound');
 		}
 		$article = $result->fetch_assoc();
-		$document = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $article['body']);
+		$document = iconv("UTF-8", "ISO-8859-1//IGNORE", $article['body']);
 		$position = strpos($document, '<div class="gu_advert">');
 		if (($position !== False) && ($position > 0)) {
 			$document = substr($document, 0, $position);
 		}
 		$title = $article['title'];
-		$query = sprintf('SELECT * FROM Entities WHERE articleid = %u GROUP BY type ORDER BY relevance DESC',$article['id']);
-		$result = $conn->query($query);
-		$entityid = 0;
-		$entitieslist = '';
-		$first = true;
-		$lasttype = '';
-		while ($entity = $result->fetch_assoc()) {
-			$entityid++;
-			if ($entity['type'] != $lasttype) {
-				$lasttype = $entity['type'];
-				if (!$first) {
-					$entitieslist .= '</ul></li>'.PHP_EOL;
-				} else {
-					$first = false;
-				}
-				$entitieslist .= '<li onclick="showsublist('.$entityid.');">'.$entity['type'].' &gt;&gt;<ul id="entitysublist-'.$entityid.'" style="display: none;">'.PHP_EOL;
-			}
-			$entityid++;
-			$entitieslist .= '<li id="entity-'.$entityid.'"><a href="javascript:highlightentity('.$entityid.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</a></li>'.PHP_EOL;
-			$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
-			$instanceresult = $conn->query($query);
-			$instanceignores = array("i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "his", "hers", "mine", "yours", "ours", "theirs");
-			while ($instance = $instanceresult->fetch_assoc()) {
-				if (in_array(strtolower(trim($instance['exact'])), $instanceignores)) {
-					continue;
-				}
-				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
-				$replace = '<span class="highlighter-'.$entityid.'">'.trim($instance['exact']).'</span>';
-				$newdocument = preg_replace($search, $replace, $document);
-				if ($newdocument !== null) {
-					$document = $newdocument;
-				}
-			}
-		}
 	} else if (isset($_GET['articleurl'])) {
 		$guardianurl = sprintf('http://content.guardianapis.com/%s'.
 			'?format=json&show-fields=headline%%2Cbody&api-key=%s',
@@ -77,78 +43,78 @@
 		if ($result->response->total > 0) {
 			$title = $result->response->content->fields->headline;
 			$document = $result->response->content->fields->body;
-
-			$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
-
-			$text = substr($document,0,100000);
-
-			$ch = curl_init($baseurl);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $text);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-				'x-calais-licenseID: nnjdz39esaj7uab2x4s7qwvu',
-				'Content-Type: text/raw',
-				'Content-Length: ' . strlen($text),
-				'Accept: application/json'));
-			$result = curl_exec($ch);
-			curl_close($ch);
-
-			$data = json_decode($result,true);
-
-			unset($data['doc']);
-
-			$information = array('entities'=>array());
-
-			foreach ($data as $key => $value) {
-				switch ($value['_typeGroup']) {
-					case 'topics':
-						break;
-					case 'entities':
-						$information['entities'][$value['_type']][$value['name']] = array(
-							'instances'=>$value['instances'],
-							'relevance'=>$value['relevance']);
-						break;
-				}
-			}
-
-			$uasort_function = function($a,$b) {
-				if ($a['relevance'] > $b['relevance']) {
-					return -1;
-				} else if ($a['relevance'] < $b['relevance']) {
-					return 1;
-				} else {
-					return 0;
-				}
-			};
-
-			foreach (array_keys($information['entities']) as $key) {
-				uasort($information['entities'][$key],$uasort_function);
-			}
-			$id = 0;
-			$entitieslist = '';
-			foreach($information['entities'] as $entitytype => $entities) {
-				$id++;
-				$entitieslist .= '<li onclick="showsublist('.$id.');">'.$entitytype.' &gt;&gt;<ul id="entitysublist-'.$id.'" style="display: none;">'.PHP_EOL;
-				foreach ($entities as $entityname => $entityinfo) {
-					$id++;
-					$entitieslist .= '<li id="entity-'.$id.'"><a href="javascript:highlightentity('.$id.');">'.$entityname.' (Relevance Score: '.$entityinfo['relevance'].')</a></li>'.PHP_EOL;
-					foreach ($entityinfo['instances'] as $instance) {
-						$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
-						$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
-						$newdocument = preg_replace($search, $replace, $document);
-						if ($newdocument !== null) {
-							$document = $newdocument;
-						}
-					}
-				}
-				$entitieslist .= '</ul></li>'.PHP_EOL;
-			}
 		} else {
 			header('Location: search.php?articlenotfound');
 		}
 	} else {
 		header('Location: index.php');
+	}
+
+	$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
+
+	$text = substr($document,0,100000);
+
+	$ch = curl_init($baseurl);
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $text);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+		'x-calais-licenseID: nnjdz39esaj7uab2x4s7qwvu',
+		'Content-Type: text/raw',
+		'Content-Length: ' . strlen($text),
+		'Accept: application/json'));
+	$result = curl_exec($ch);
+	curl_close($ch);
+
+	$data = json_decode($result,true);
+
+	unset($data['doc']);
+
+	$information = array('entities'=>array());
+
+	foreach ($data as $key => $value) {
+		switch ($value['_typeGroup']) {
+			case 'topics':
+				break;
+			case 'entities':
+				$information['entities'][$value['_type']][$value['name']] = array(
+					'instances'=>$value['instances'],
+					'relevance'=>$value['relevance']);
+				break;
+		}
+	}
+
+	$uasort_function = function($a,$b) {
+		if ($a['relevance'] > $b['relevance']) {
+			return -1;
+		} else if ($a['relevance'] < $b['relevance']) {
+			return 1;
+		} else {
+			return 0;
+		}
+	};
+
+	foreach (array_keys($information['entities']) as $key) {
+		uasort($information['entities'][$key],$uasort_function);
+	}
+	$id = 0;
+	$entitieslist = '';
+	foreach($information['entities'] as $entitytype => $entities) {
+		$id++;
+		$entitieslist .= '<li onclick="showsublist('.$id.');">'.$entitytype.' &gt;&gt;<ul id="entitysublist-'.$id.'" style="display: none;">'.PHP_EOL;
+		foreach ($entities as $entityname => $entityinfo) {
+			$id++;
+			$entitieslist .= '<li id="entity-'.$id.'"><a href="javascript:highlightentity('.$id.');">'.$entityname.' (Relevance Score: '.$entityinfo['relevance'].')</a></li>'.PHP_EOL;
+			foreach ($entityinfo['instances'] as $instance) {
+				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
+				$replace = '<span class="highlighter-'.$id.'">'.trim($instance['exact']).'</span>';
+				$newdocument = preg_replace($search, $replace, $document);
+				if ($newdocument !== null) {
+					$document = $newdocument;
+				}
+			}
+		}
+		$entitieslist .= '</ul></li>'.PHP_EOL;
 	}
 ?>
 <!DOCTYPE html> 
