@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
 	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
 	<script type="text/javascript" src="./resources/iscroll.js"></script>
-	
+	<meta http-equiv="refresh" content="3;url=./" />
 </head> 
 <body> 
 
