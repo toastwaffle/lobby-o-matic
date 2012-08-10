@@ -49,7 +49,8 @@
 			$pol = query("select FullName, Email from Politicians where PoliticianID = ".($p + 0));
 			if (count($pol) > 0) {
 				$toarray[] = $pol[0][1];
-				$emailtext[] = <<<EMAILTEXT
+				if (count($bill) > 0) {
+					$emailtext[] = <<<EMAILTEXT
 Dear {$pol[0][0]},
 
 The following message has been sent from Lobby-O-Matic user {$_SESSION["username"]}, relating to the {$bill[0][0]} bill:
@@ -60,6 +61,19 @@ Thanks,
 
 The Lobby-O-Matic team.
 EMAILTEXT;
+				} else {
+					$emailtext[] = <<<EMAILTEXT
+Dear {$pol[0][0]},
+
+The following message has been sent from Lobby-O-Matic user {$_SESSION["username"]}:
+
+{$_POST["messagebody"]}
+
+Thanks,
+
+The Lobby-O-Matic team.
+EMAILTEXT;
+				}
 			}
 		}
 	}
@@ -83,7 +97,11 @@ EMAILTEXT;
 </body>
 </html><?php
 	query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($_POST["messagebody"])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$conn->real_escape_string($_POST["messagebody"])."', 'sent')");
-	query("insert into Threads (threadkey, initialuser, BillID) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].", ".$bill[0][1].")");
+	if (count($bill) > 0) {
+		query("insert into Threads (threadkey, initialuser, BillID) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].", ".$bill[0][1].")");
+	} else {
+		query("insert into Threads (threadkey, initialuser) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].")");
+	}
 	query("insert into Watchers (threadid, userid) values (".$conn -> insert_id.", ".$_SESSION["id"].")");
 	foreach ($toarray as $key => $to) {
 		$emailtext[$key] = wordwrap($emailtext[$key], 70);
