@@ -5,7 +5,7 @@
     session_start();
 
     global $conn,$guardianapikey;
-	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrs2012');
+	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrstest');
 	$guardianapikey = 'dmkvkaamsuthc484cy53xu3z';
 
     $messages = ''; // Used to display messages on every page.
