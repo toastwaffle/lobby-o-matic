@@ -27,7 +27,7 @@
 			header('Location: writemessage.php?articlenotfound');
 		}
 		$article = $result->fetch_assoc();
-		$document = iconv("UTF-8", "ISO-8859-1//IGNORE", $article['body']);
+		$document = $article['body'];
 		$position = strpos($document, '<div class="gu_advert">');
 		if (($position !== False) && ($position > 0)) {
 			$document = substr($document, 0, $position);
@@ -43,6 +43,10 @@
 		if ($result->response->total > 0) {
 			$title = $result->response->content->fields->headline;
 			$document = $result->response->content->fields->body;
+			$position = strpos($document, '<div class="gu_advert">');
+			if (($position !== False) && ($position > 0)) {
+				$document = substr($document, 0, $position);
+			}
 		} else {
 			header('Location: search.php?articlenotfound');
 		}
