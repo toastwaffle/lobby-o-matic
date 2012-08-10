@@ -107,6 +107,7 @@
 
     function query($querystring) {
         global $conn;
+        error_log($querystring);
         $result = $conn -> query($querystring, MYSQLI_USE_RESULT);
         $x = array();
         if ($conn -> affected_rows == - 1) {
