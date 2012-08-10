@@ -61,7 +61,7 @@ iframe {
 	right:0px;
 	width:100%;
 	border:0px;
-	height: 75%;
+	height: 65%;
 }
 	</style>
 </head> 
@@ -73,7 +73,7 @@ iframe {
 			<h1>Letter</h1>
 		</div><!-- /header -->
 		<div data-role="content" data-theme="d">
-			<form method="post" action="">
+			<form method="post" action="./sendmessage.php?billid=<?php echo($bill[0][0]); ?>">
 				Category:
 				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val() + '&billid=<?php echo($bill[0][0]); ?>', function() {$('#chosepolitician').trigger('create');});">
 					<option value="0">Recommended</option><?php
@@ -90,12 +90,12 @@ iframe {
 	$relpols = getRelatedPoliticians($bill[0][0], 10);
 	foreach ($relpols as $rp) {
 		echo("
-					<input type=\"checkbox\" name=\"".$rp[0]."\" id=\"".$rp[0]."\" />
+					<input type=\"checkbox\" name=\"".$rp[0]."\" id=\"".$rp[0]."\" value=/\"".$rp[0]."\">
 					<label style=\"font-size:0.5pc;\" for=\"".$rp[0]."\">".$rp[3]."</label>");
 	}
 	?>
 				</fieldset>
-				<textarea></textarea>
+				<textarea name="messagebody"></textarea>
 				<input type="submit" value="Send" />
 			</form>
 		</div><!-- /content -->
@@ -106,11 +106,13 @@ iframe {
 	<div data-role="page" id="main">
 
 		<div data-role="header">
+			<a href="./" data-ajax="false" class="ui-btn-active">Back</a>
 			<h1>Lobby-O-Matic</h1>
+			<a href="./logout/" data-ajax="false" style="float:right;">Logout</a>
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b" style="padding:0;">
-			<div style="height:25%;overflow:auto;padding-left:1pc;padding-right:1pc;">
+			<div style="height:35%;overflow:auto;padding-left:1pc;padding-right:1pc;">
 				<p class="ui-body-e" style="padding:0.1pc;"><?php echo($bill[0][2]); ?></p>
 				<p><?php echo($bill[0][3]); ?></p>
 				<h2>Related Articles</h2>
