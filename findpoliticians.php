@@ -17,12 +17,21 @@
 		$longquery .= " order by score desc limit $limit) as `scoretable` inner join Politicians on Politicians.PoliticianID = scoretable.PID";
 		return query($longquery);
 	}
+
+	function getSearchtermPoliticians($searchterm, $limit) {
+		global $conn;
+		$longquery = sprintf("select Politicians.*, MATCH(Politicians.TopWords) AGAINST ('%s') as score from Politicians ORDER BY score DESC LIMIT 0, %u",$conn->real_escape_string($searchterm), $limit);
+		return query($longquery);
+	}
 	
 	//print_r(getRelatedPoliticians(1, 10));
-
-	$pols = query("select Politicians.PoliticianID, '', '', Politicians.Name from Politicians inner join PoliticianDepartments on Politicians.PoliticianID = PoliticianDepartments.PoliticianID where PoliticianDepartments.DepartmentID = ".($_GET["depid"] + 0)." order by Politicians.Name");
-	if (count($pols) == 0 && isset($_GET["billid"])) {
-		$pols = getRelatedPoliticians($_GET["billid"] + 0, 10);
+	if (isset($_GET["billid"])) {
+		$pols = query("select Politicians.PoliticianID, '', '', Politicians.Name from Politicians inner join PoliticianDepartments on Politicians.PoliticianID = PoliticianDepartments.PoliticianID where PoliticianDepartments.DepartmentID = ".($_GET["depid"] + 0)." order by Politicians.Name");
+		if (count($pols) == 0) {
+			$pols = getRelatedPoliticians($_GET["billid"] + 0, 10);
+		}
+	} else {
+		$pols = getSearchtermPoliticians($_GET['searchterm'], $limit)
 	}
 	
 	foreach ($pols as $p) {
