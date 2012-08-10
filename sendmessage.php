@@ -43,7 +43,7 @@
 		<div data-role="content" data-theme="b"><?php
 	$emailtext = array();
 	$toarray = array();
-	$bill = query("select Title from Bills where BillID = ".($_GET["billid"] + 0));
+	$bill = query("select Title, BillID from Bills where BillID = ".($_GET["billid"] + 0));
 	foreach ($_POST as $key => $p) {
 		if ($key == $p) {
 			$pol = query("select FullName, Email from Politicians where PoliticianID = ".($p + 0));
@@ -83,11 +83,10 @@ EMAILTEXT;
 </body>
 </html><?php
 	query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($_POST["messagebody"])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$conn->real_escape_string($_POST["messagebody"])."', 'sent')");
-	query("insert into Threads (threadkey, initialuser) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].")");
-	$tid = $conn -> insert_id;
+	query("insert into Threads (threadkey, initialuser, BillID) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].", ".$bills[0][1].")");
+	query("insert into Watchers (threadid, userid) values (".$conn -> insert_id.", ".$_SESSION["id"].")");
 	foreach ($toarray as $key => $to) {
 		$emailtext[$key] = wordwrap($emailtext[$key], 70);
-		query("insert into Watchers (threadid, userid) values (".$tid.", ".$_SESSION["id"].")");
 		mail(
 			//$to
 			//"madman.bob@hotmail.co.uk"
