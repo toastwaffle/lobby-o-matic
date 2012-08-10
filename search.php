@@ -60,7 +60,7 @@
 		<div data-role="content" data-theme="d">
 			<form method="post" action="">
 				Category:
-				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val() + '&billid=<?php echo($bill[0][0]); ?>', function() {$('#chosepolitician').trigger('create');});">
+				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val(), function() {$('#chosepolitician').trigger('create');});">
 					<option value="0">Recommended</option><?php
 	$departments = query("select DepartmentID, DepartmentName from Departments order by DepartmentName");
 	foreach ($departments as $d) {

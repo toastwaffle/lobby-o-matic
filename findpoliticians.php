@@ -21,7 +21,7 @@
 	//print_r(getRelatedPoliticians(1, 10));
 
 	$pols = query("select Politicians.PoliticianID, '', '', Politicians.Name from Politicians inner join PoliticianDepartments on Politicians.PoliticianID = PoliticianDepartments.PoliticianID where PoliticianDepartments.DepartmentID = ".($_GET["depid"] + 0)." order by Politicians.Name");
-	if (count($pols) == 0) {
+	if (count($pols) == 0 && isset($_GET["billid"])) {
 		$pols = getRelatedPoliticians($_GET["billid"] + 0, 10);
 	}
 	

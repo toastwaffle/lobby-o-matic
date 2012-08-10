@@ -65,7 +65,7 @@
 			$guardianapikey);
 		$guardianresult = file_get_contents($guardianurl);
 		$result = json_decode($guardianresult);
-		if ($result->response->total < 1) {
+		if ($result->response->total > 0) {
 			$title = $result->response->content->fields->headline;
 			$document = $result->response->content->fields->body;
 
