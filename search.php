@@ -27,7 +27,6 @@
 		'&format=json&show-fields=headline%%2Cbody%%2Cstandfirst&show-references=all&api-key=%s',
 		urlencode($_POST['searchterm']),
 		$guardianapikey);
-	echo $guardianurl;
 	$guardianresult = file_get_contents($guardianurl);
 	$result = json_decode($guardianresult);
 	if ($result->response->total > 0) {
@@ -99,7 +98,7 @@
 			<h2>Article Search Results</h2>
 			<ul data-role="listview" data-inset="true" data-filter="true" id="articles-list">
 				<?php foreach ($guardianarticles as $article) {
-					echo('<li><a href="viewarticle.php?articleurl='.urlencode($article->id).'" data-panel="main" alt="'.$article->fields->standfirst.'">'.$article->fields->headline.'</a></li>'.PHP_EOL);
+					echo('<li><a href="viewarticle.php?articleurl='.urlencode($article->id).'" data-panel="main" alt="'.htmlentities($article->fields->standfirst).'">'.$article->fields->headline.'</a></li>'.PHP_EOL);
 				} ?>
 			</ul>
 		</div><!-- /content -->
