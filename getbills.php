@@ -69,9 +69,9 @@
 				foreach ($guardianarticles as $article) {
 					query(sprintf("INSERT INTO Articles (billid,title,body,description) VALUES ('%s','%s','%s','%s')",
 						$conn->real_escape_string($billid),
-						$conn->real_escape_string($article['fields']['headline']),
-						$conn->real_escape_string($article['fields']['body']),
-						$conn->real_escape_string($article['fields']['standfirst'])));
+						$conn->real_escape_string($article->fields->headline),
+						$conn->real_escape_string($article->fields->body),
+						$conn->real_escape_string($article->fields->standfirst)));
 					$articleid = $conn -> insert_id;
 
 					$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
