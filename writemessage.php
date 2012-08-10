@@ -105,7 +105,7 @@ iframe {
 				<h2>Article Search Results</h2>
 				<ul data-role="listview" data-inset="true" data-filter="true" id="articles-list">
 					<?php foreach ($guardianarticles as $article) {
-						echo('<li><a href="viewarticle.php?articleid='.$article[0].'" data-panel="main" alt="'.$article[2].'">'.$article[1].'</a></li>'.PHP_EOL);
+						echo('<li><a href="viewarticle.php?articleid='.$article[0].'" data-panel="main" alt="'.htmlentities($article[2]).'">'.$article[1].'</a></li>'.PHP_EOL);
 					} ?>
 				</ul>
 			</div>
