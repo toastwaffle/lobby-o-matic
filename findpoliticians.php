@@ -31,7 +31,10 @@
 			$pols = getRelatedPoliticians($_GET["billid"] + 0, 10);
 		}
 	} else {
-		$pols = getSearchtermPoliticians($_GET['searchterm'], $limit);
+		$pols = query("select Politicians.PoliticianID, '', '', Politicians.Name from Politicians inner join PoliticianDepartments on Politicians.PoliticianID = PoliticianDepartments.PoliticianID where PoliticianDepartments.DepartmentID = ".($_GET["depid"] + 0)." order by Politicians.Name");
+		if (count($pols) == 0) {
+			$pols = getSearchtermPoliticians($_GET['searchterm'], 10);
+		}
 	}
 	
 	foreach ($pols as $p) {
