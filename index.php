@@ -71,6 +71,7 @@
 
 		<div data-role="header">
 			<h1>Lobby-O-Matic</h1>
+			<a href="./logout/" data-ajax="false" style="float:right;">Logout</a>
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="b">
