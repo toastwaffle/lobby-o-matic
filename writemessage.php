@@ -1,7 +1,18 @@
 <?php
 	include('config.php');
 	if (!isset($_SESSION['username'])) {
+		if (isset($_GET['billid'])) {
+			$_SESSION['billid'] = $_GET['billid'];
+		}
 		header('Location: login.php?redirect=writemessage.php&pleaselogin');
+	}
+
+	if (!isset($_GET['billid'])) {
+		if (isset($_SESSION['billid'])) {
+			$_GET['billid'] = $_SESSION['billid'];
+		} else {
+			header('Location: index.php?selectbill');
+		}
 	}
 	
 	function getRelatedPoliticians($billid, $limit) {
@@ -104,7 +115,7 @@ iframe {
 			<div style="height:35%;overflow:auto;padding-left:1pc;padding-right:1pc;">
 				<p class="ui-body-e" style="padding:0.1pc;"><?php echo($bill[0][2]); ?></p>
 				<p><?php echo($bill[0][3]); ?></p>
-				<h2>Article Search Results</h2>
+				<h2>Related Articles</h2>
 				<ul data-role="listview" data-inset="true" data-filter="true" id="articles-list">
 					<?php foreach ($guardianarticles as $article) {
 						echo('<li><a href="viewarticle.php?articleid='.$article[0].'" data-panel="main" alt="'.htmlentities($article[2]).'">'.$article[1].'</a></li>'.PHP_EOL);

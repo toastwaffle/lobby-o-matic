@@ -2,7 +2,7 @@
     ini_set('display_errors','On');
     error_reporting(E_ALL);
 
-    session_start();
+    session_start(); 
 
     global $conn,$guardianapikey;
 	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrstest');
@@ -29,7 +29,13 @@
         $messages .= '<p class="error">An error occurred. Please try again later.</p>';
     }
     if (isset($_GET['entersearch'])) {
-        $messages .= '<p class="error">Please enter a search term.</p>';
+        $messages .= '<p class="warning">Please enter a search term.</p>';
+    }
+    if (isset($_GET['selectbill'])) {
+        $messages .= '<p class="warning">Please select a bill.</p>';
+    }
+    if (isset($_GET['articlenotfound'])) {
+        $messages .= '<p class="error">Sorry, we were unable to retrieve that article. Please try again later.</p>';
     }
 
     function shutdown() {
