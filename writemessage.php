@@ -58,8 +58,8 @@ iframe {
 		</div><!-- /header -->
 		<div data-role="content" data-theme="d">
 			<form method="post" action="">
-				To:
-				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val() + '&billid=<?php echo($bill[0][0]); ?>')">
+				Category:
+				<select onchange="$('#chosepolitician').load('./findpoliticians.php?depid=' + $(this).val() + '&billid=<?php echo($bill[0][0]); ?>', function() {$('#chosepolitician').trigger('create');});">
 					<option value="0">Recommended</option><?php
 	$departments = query("select DepartmentID, DepartmentName from Departments order by DepartmentName");
 	foreach ($departments as $d) {
@@ -68,14 +68,17 @@ iframe {
 	}
 	?>
 				</select>
-				<select id="chosepolitician"><?php
+				To:
+				<fieldset data-role="controlgroup" style="height:10pc;overflow:auto;" id="chosepolitician">
+					<?php
 	$relpols = getRelatedPoliticians($bill[0][0], 10);
 	foreach ($relpols as $rp) {
 		echo("
-					<option value=\"".$rp[0]."\">".$rp[3]."</option>");
+					<input type=\"checkbox\" name=\"".$rp[0]."\" id=\"".$rp[0]."\" />
+					<label style=\"font-size:0.5pc;\" for=\"".$rp[0]."\">".$rp[3]."</label>");
 	}
 	?>
-				</select>
+				</fieldset>
 				<textarea></textarea>
 				<input type="submit" value="Send" />
 			</form>
@@ -90,9 +93,18 @@ iframe {
 			<h1>Lobby-O-Matic</h1>
 		</div><!-- /header -->
 
-		<div data-role="content" data-theme="b">
-			<p><?php echo($bill[0][2]); ?></p>
-			<p><?php echo($bill[0][3]); ?></p>
+		<div data-role="content" data-theme="b" style="padding:0px;">
+			<div style="height:25%;overflow:auto;padding-left:1pc;padding-right:1pc;">
+				<p class="ui-body-e" style="padding:0.1pc;"><?php echo($bill[0][2]); ?></p>
+				<p><?php echo($bill[0][3]); ?></p><?php
+	$articles = query("select title, body, description from Articles where billid = ".$bill[0][0]);
+	foreach ($articles as $x) {
+		echo("
+				<p>".$x[0]."<br/><br/>".$x[1]."<br/><br/>".$x[2]."</p>");
+	}
+?>
+
+			</div>
 			<p><iframe src="http://docs.google.com/viewer?url=<?php echo(urlencode($bill[0][5])); ?>&embedded=true" /></p>
 		</div><!-- /content -->
 
