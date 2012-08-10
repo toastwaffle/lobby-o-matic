@@ -54,7 +54,11 @@
 			$entitieslist .= '<li id="entity-'.$entityid.'"><a href="javascript:highlightentity('.$entityid.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</a></li>'.PHP_EOL;
 			$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
 			$instanceresult = $conn->query($query);
+			$instanceignores = array("i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "his", "hers", "mine", "yours", "ours", "theirs")
 			while ($instance = $instanceresult->fetch_assoc()) {
+				if (in_array(strtolower(trim($instance['exact'])), $instanceignores) {
+					continue;
+				}
 				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
 				$replace = '<span class="highlighter-'.$entityid.'">'.trim($instance['exact']).'</span>';
 				$newdocument = preg_replace($search, $replace, $document);
