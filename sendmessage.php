@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="./resources/jquery.mobile.js"></script>
 	<script type="text/javascript" src="./resources/iscroll-wrapper.js"></script>
 	<script type="text/javascript" src="./resources/iscroll.js"></script>
-	<meta http-equiv="refresh" content="3;url=./" />
+	
 </head> 
 <body> 
 
@@ -83,7 +83,7 @@ EMAILTEXT;
 </body>
 </html><?php
 	query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($_POST["messagebody"])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$conn->real_escape_string($_POST["messagebody"])."', 'sent')");
-	query("insert into Threads (threadkey, initialuser, BillID) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].", ".$bills[0][1].")");
+	query("insert into Threads (threadkey, initialuser, BillID) values ('".md5($_POST["messagebody"])."', ".$_SESSION["id"].", ".$bill[0][1].")");
 	query("insert into Watchers (threadid, userid) values (".$conn -> insert_id.", ".$_SESSION["id"].")");
 	foreach ($toarray as $key => $to) {
 		$emailtext[$key] = wordwrap($emailtext[$key], 70);
