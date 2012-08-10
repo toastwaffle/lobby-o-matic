@@ -76,14 +76,16 @@
 
 					$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
 
+					$articletext = substr($article->fields->body,0,100000);
+
 					$ch = curl_init($baseurl);
 					curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 					curl_setopt($ch, CURLOPT_POST, true);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, substr($billtext,0,100000));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $articletext);
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 						'x-calais-licenseID: nnjdz39esaj7uab2x4s7qwvu',
 						'Content-Type: text/raw',
-						'Content-Length: ' . strlen($billtext),
+						'Content-Length: ' . strlen($articletext),
 						'Accept: application/json'));
 					$result = curl_exec($ch);
 					curl_close($ch);

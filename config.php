@@ -110,7 +110,7 @@
     }
 
     function extractCommonWords($string,$count){
-        $stopWords = array('i','a','about','an','and','are','as','at','be','by','com','de','en','for','from','how','in','is','it','la','of','on','or','that','the','this','to','was','what','when','where','who','will','with','und','the','www','bill','parliament','act','lords','commons','parliamentary','person','section','under','about','from','activity','activities','subsection','part','which');
+        $stopWords = array('i','a','about','an','and','are','as','at','be','by','com','de','en','for','from','how','in','is','it','la','of','on','or','that','the','this','to','was','what','when','where','who','will','with','und','the','www','bill','parliament','act','lords','commons','parliamentary','person','section','under','about','from','activity','activities','subsection','part','which','0','1','2','3','4','5','6','7','8','9','wikipedia','zeitgeist','north','south','east','west','margin','padding','edit');
 
         $string = preg_replace('/\s\s+/i', '', $string); // replace whitespace
         $string = trim($string); // trim the string
