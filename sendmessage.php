@@ -86,6 +86,7 @@ EMAILTEXT;
 	echo("hi");
 		$emailtext[$key] = wordwrap($emailtext[$key], 70);
 		query("insert into Threads (threadkey, initialuser) values ('".md5($emailtext[$key])."', ".$_SESSION["id"].")");
+		query("insert into Watchers (threadid, userid) values (".$conn -> insert_id.", ".$_SESSION["id"].")");
 		query("insert into Emails (threadkey, fromname, fromemail, message, type) values ('".md5($emailtext[$key])."', '".$_SESSION["firstname"]." ".$_SESSION["lastname"]."', '".$_SESSION["email"]."', '".$emailtext[$key]."', 'sent')");
 		mail(
 			//$to
