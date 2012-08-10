@@ -26,7 +26,7 @@
 		if (!$result) {
 			header('Location: writemessage.php?articlenotfound');
 		}
-		$article = $result->fetch_assoc($result);
+		$article = $result->fetch_assoc();
 		$document = iconv("UTF-8", "ISO-8859-1//TRANSLIT", $article['body']);
 		$position = strpos($document, '<div class="gu_advert">');
 		if (($position !== False) && ($position > 0)) {
@@ -188,8 +188,6 @@
 	</style>
 </head> 
 <body>
-
-<div data-role="panel" data-id="main">
 	<div data-role="page" id="main">
 
 		<div data-role="header">
@@ -211,7 +209,6 @@
 
 	</div><!-- /page -->
 
-</div>
 
 </body>
 </html>
