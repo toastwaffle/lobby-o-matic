@@ -26,7 +26,9 @@
 	}
 	
 	foreach ($pols as $p) {
-		echo("<option value=\"".$p[0]."\">".$p[3]."</option>");
+		echo("
+					<input type=\"checkbox\" name=\"".$p[0]."\" id=\"".$p[0]."\" />
+					<label style=\"font-size:0.5pc;\" for=\"".$p[0]."\">".$p[3]."</label>");
 	}
 	
 	?>
