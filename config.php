@@ -3,6 +3,11 @@
     error_reporting(E_ALL);
 
     session_start();
+    if($_REQUEST['page'] != $_SESSION['oldPage']) 
+        $_SESSION['oldURL'] = $_SESSION['newURL'];
+
+    $_SESSION['oldPage']     = $_REQUEST['page'];
+    $_SESSION['newURL']     = $_SERVER['REQUEST_URI'];  
 
     global $conn,$guardianapikey;
 	$conn = new mysqli('localhost','yrswebuser','sndTDaEqDerGr643','yrstest');
@@ -33,6 +38,9 @@
     }
     if (isset($_GET['selectbill'])) {
         $messages .= '<p class="warning">Please select a bill.</p>';
+    }
+    if (isset($_GET['articlenotfound'])) {
+        $messages .= '<p class="error">Sorry, we were unable to retrieve that article. Please try again later.</p>';
     }
 
     function shutdown() {
