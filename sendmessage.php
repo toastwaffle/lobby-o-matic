@@ -91,6 +91,6 @@ EMAILTEXT;
 			//$to
 			//"madman.bob@hotmail.co.uk"
 			"samuel.littley@toastwaffle.com"
-			, '[Lobby-O-Matic] '.$_SESSION["username"]." on the ".$bill[0][0]." bill", $emailtext[$key], 'From: lobbyomatic@toastwaffle.com\r\nReply-To: lobbyomatic+'.md5($emailtext[$key]).'@toastwaffle.com');
+			, '[Lobby-O-Matic] '.$_SESSION["username"]." on the ".$bill[0][0]." bill", $emailtext[$key], "From: lobbyomatic@toastwaffle.com\r\nReply-To: lobbyomatic+".md5($emailtext[$key])."@toastwaffle.com");
 	}
 ?>
