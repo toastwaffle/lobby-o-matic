@@ -138,7 +138,7 @@ EMAILTEXT;
 		<h1>Lobby-O-Matic - Login</h1>
 	</div><!-- /header -->
 
-	<div data-role="content" data-theme="b" style="padding-bottom: 200px;">
+	<div data-role="content" data-theme="b">
 		<div data-role="container" data-corners="true">
 			<h3>Log In</h3>
 			<form action="login.php" method="post" data-ajax="false">
@@ -196,7 +196,7 @@ EMAILTEXT;
 		</div>
 
 		<?php include('footer.php'); ?>
-		
+
 	</div><!-- /content -->
 
 </div><!-- /page -->

@@ -19,3 +19,6 @@
 	color: #f60;
 	font-weight: bold;
 }
+div.ui-panel-right div.ui-content {
+	padding-bottom: 77px;
+}

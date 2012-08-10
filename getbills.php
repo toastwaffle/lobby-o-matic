@@ -1,6 +1,6 @@
 <?php
 
-	include('config.php');
+	include('config2.php');
 
 	$array_map = function($item) {
 		if ($item->fields->body == '<!-- Redistribution rights for this field are unavailable -->') {
@@ -69,21 +69,23 @@
 				foreach ($guardianarticles as $article) {
 					query(sprintf("INSERT INTO Articles (billid,title,body,description) VALUES ('%s','%s','%s','%s')",
 						$conn->real_escape_string($billid),
-						$conn->real_escape_string($article['fields']['headline']),
-						$conn->real_escape_string($article['fields']['body']),
-						$conn->real_escape_string($article['fields']['standfirst'])));
+						$conn->real_escape_string($article->fields->headline),
+						$conn->real_escape_string($article->fields->body),
+						$conn->real_escape_string($article->fields->standfirst)));
 					$articleid = $conn -> insert_id;
 
 					$baseurl = 'http://api.opencalais.com/tag/rs/enrich';
 
+					$articletext = substr($article->fields->body,0,100000);
+
 					$ch = curl_init($baseurl);
 					curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 					curl_setopt($ch, CURLOPT_POST, true);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, substr($billtext,0,100000));
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $articletext);
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 						'x-calais-licenseID: nnjdz39esaj7uab2x4s7qwvu',
 						'Content-Type: text/raw',
-						'Content-Length: ' . strlen($billtext),
+						'Content-Length: ' . strlen($articletext),
 						'Accept: application/json'));
 					$result = curl_exec($ch);
 					curl_close($ch);
@@ -123,7 +125,7 @@
 
 							foreach($entity['instances'] as $instance) {
 								query(sprintf("INSERT INTO EntityInstances (entityid, prefix, exact, suffix, offset, length) VALUES ('%s','%s','%s','%s','%s','%s')",
-									$conn->real_escape_string($entity),
+									$conn->real_escape_string($entityid),
 									$conn->real_escape_string($instance['prefix']),
 									$conn->real_escape_string($instance['exact']),
 									$conn->real_escape_string($instance['suffix']),
