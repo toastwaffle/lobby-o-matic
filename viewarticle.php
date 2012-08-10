@@ -54,9 +54,9 @@
 			$entitieslist .= '<li id="entity-'.$entityid.'" onclick="highlightentity('.$id.');">'.$entity['name'].' (Relevance Score: '.$entity['relevance'].')</li>'.PHP_EOL;
 			$query = sprintf('SELECT * FROM EntityInstances WHERE entityid = %u',$entity['id']);
 			$instanceresult = $conn->query($query);
-			$instanceignores = array("i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "his", "hers", "mine", "yours", "ours", "theirs");
+			$instanceignores = array("i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "his", "hers", "mine", "yours", "ours", "theirs")
 			while ($instance = $instanceresult->fetch_assoc()) {
-				if (in_array(strtolower(trim($instance['exact'])), $instanceignores)) {
+				if (in_array(strtolower(trim($instance['exact'])), $instanceignores) {
 					continue;
 				}
 				$search = '/\b'.preg_quote(trim($instance['exact'])).'\b/';
