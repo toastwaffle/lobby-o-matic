@@ -195,9 +195,9 @@ EMAILTEXT;
 			</form>
 		</div>
 
-		<?php include('footer.php'); ?>
-
 	</div><!-- /content -->
+
+		<?php include('footer.php'); ?>
 
 </div><!-- /page -->
 </div>
